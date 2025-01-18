@@ -14,3 +14,7 @@ body{
     /* background-color: #dc2626; */
     
 }
+
+.brands .swiper-wrapper{
+    transition-timing-function: linear;
+}

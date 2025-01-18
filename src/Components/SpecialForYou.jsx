@@ -11,7 +11,7 @@ import { FaCartPlus, FaEye } from "react-icons/fa6";
 
 const SpecialForYou = () => {
     return (
-        <div className=" py-20">
+        <div className=" py-14">
             <div className="w-11/12 mx-auto">
           <div className="text-center mb-10">
             <h2 className="font-bold text-4xl">Specially For You</h2>

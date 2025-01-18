@@ -12,7 +12,7 @@ import ProductCard from "./ProductCard";
 // import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 const DiscountCard = () => {
   return (
-    <div className="bg-red-200 py-20">
+    <div className="bg-clr-1 py-14">
       <div className="w-11/12 mx-auto">
         <div className="text-center mb-10">
           <h2 className="font-bold text-4xl">Flash Sale</h2>
