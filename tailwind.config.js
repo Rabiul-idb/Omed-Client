@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'download-bg': "url('/public/bg-download.webp')",
+      },
+      colors: {
+        'clr-1': '#fef5ee',
+      }
+    },
   },
   plugins: [
     require('daisyui'),

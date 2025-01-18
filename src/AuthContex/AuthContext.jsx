@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { app } from "../Firebase/Firebase.init";
 import { children, createContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const auth = getAuth(app);
 
@@ -12,26 +13,31 @@ const AuthContext = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
 
-
+ 
     
       // Observer
    useEffect(()=>{
     const unSubscribe = onAuthStateChanged(auth, (currentUser) =>{
-        if(currentUser){
+      
+
+        if(currentUser?.email){
             setUser(currentUser);
         }
-        setLoading(false);
+
+       setLoading(false)
         
     })
     return unSubscribe;
    },[])
 
-
-    // create a new user
-    const createNewUser = (email, password) =>{
-        setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+ 
+  
+  // create a new user
+  const createNewUser = (email, password) =>{
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password)
+  }
+   
 
    // logOut
    const logOut = () =>{

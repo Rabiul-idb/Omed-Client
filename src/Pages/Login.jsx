@@ -8,6 +8,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 
 import animationData from '../assets/lottie/lottie-login.json'
 import useAuth from "../Hooks/useAuth";
+import axios from "axios";
 
 const Login = () => {
   const { userLogin, setUser, loginWithGoogle } = useAuth();
@@ -47,7 +48,7 @@ const Login = () => {
   // user login by google
   const handleGoogleLogin = () => {
     loginWithGoogle()
-      .then((result) => {
+      .then(async(result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
@@ -55,6 +56,14 @@ const Login = () => {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         setUser(user);
+
+        // save to db
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        }
+        await axios.post(`${import.meta.env.VITE_API_URL}/users/${user?.email}`, userInfo);
         Swal.fire({
           title: "Success!",
           text: "Congrates! Successfully login",

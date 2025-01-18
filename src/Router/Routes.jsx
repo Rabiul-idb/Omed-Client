@@ -6,6 +6,9 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import UpdateUserInfo from "../Pages/UpdateUserInfo";
 import Error from "../Pages/Error";
+import PrivateRoute from "../assets/PrivateRoute/PrivateRoute";
+import DashboardLayout from "../Layout/DashboardLayout";
+import Statistics from "../Dashboard/Statistics";
 
 
 export  const router = createBrowserRouter([
@@ -33,6 +36,22 @@ export  const router = createBrowserRouter([
             }
           ]
         },
+
+        // dashboard routes
+        {
+          path: "/dashboard",
+          element: <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+          </PrivateRoute>,
+          children: [
+            {
+              index: true,
+              element:<PrivateRoute>
+                <Statistics></Statistics>
+              </PrivateRoute>
+            },
+          ]
+        }
       ]);
 
 

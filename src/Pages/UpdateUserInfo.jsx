@@ -2,6 +2,7 @@
 
 import { updateProfile } from "firebase/auth";
 import useAuth from "../Hooks/useAuth";
+import { imgUpload } from "../api/utils";
 
 
 
@@ -11,16 +12,20 @@ const UpdateUserInfo = () => {
     const{displayName, photoURL} = user || {};
     //console.log(displayName, photoURL)
     
-    const handleUpdate = (e)=>{
+    const handleUpdate = async(e)=>{
         e.preventDefault();
         const name = e.target.name.value;
-        const photo = e.target.photo.value;
+        const photo = e.target.photo.files[0];
+        let photo_url = '';
         //console.log(name, photo)
 
-        updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo
+        // Upload image to imgbb
+        photo_url = await imgUpload(photo);
+
+        updateProfile (auth.currentUser, {
+            displayName: name, photoURL: photo_url
         }).then(() => {
-        setUser({...user, displayName: name, photoURL : photo});
+        setUser({...user, displayName: name, photoURL : photo_url});
         
         }).catch((error) => {
         console.log("error", error)
@@ -49,9 +54,9 @@ const UpdateUserInfo = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Photo URL</span>
+            <span className="label-text">Photo</span>
           </label>
-          <input type="text" name="photo" placeholder="Update Photo url" className="input input-bordered" required />
+          <input type="file" name="photo" placeholder="Update Photo url" className="input " required />
          
         </div>
         <div className="form-control mt-6">

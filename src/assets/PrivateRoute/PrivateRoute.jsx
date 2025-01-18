@@ -3,10 +3,10 @@ import { contextApi } from "../../AuthContex/AuthContext";
 import { Navigate, useLocation } from "react-router-dom";
 import Loading from "../../Components/Loading";
 
-const {setUser, user, loading} = useContext(contextApi);
 
 const PrivateRoute = ({children}) => {
-
+    
+    const {setUser, user, loading} = useContext(contextApi);
     const location = useLocation();
 
     if(loading){

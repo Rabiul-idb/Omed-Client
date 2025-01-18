@@ -4,66 +4,164 @@ import { FaEyeSlash, FaRegEye } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { contextApi } from "../AuthContex/AuthContext";
+import axios from "axios";
+import { imgUpload } from "../api/utils";
+import { FaSpinner } from "react-icons/fa";
 
 
 const Register = () => {
 
-     const {user, setUser, createNewUser} = useContext(contextApi);
+     const {auth, user, setUser, createNewUser, loading , setLoading} = useContext(contextApi);
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [passError, setPassError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
+    // const handleSubmit = async(e)=>{
+    //     e.preventDefault();
 
-        const name = e.target.username.value;
-        if(name.length < 5){
-            setError('Name must be at least 5 characters');
-            return;
-        }
-        const email = e.target.email.value;
+    //     const name = e.target.username.value;
+    //     if(name.length < 5){
+    //         setError('Name must be at least 5 characters');
+    //         return;
+    //     }
+    //     const email = e.target.email.value;
 
-        const password = e.target.password.value;
-        if(password.length < 6){
-            setPassError('Password must be at least 6 characters');
-            return;
-        }
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
-        if(!regex.test(password)){
-            setPassError('Password must contain at least one uppercase letter, one lowercase letter, one digit , one special charecter')
-            return;
-        }   
+    //     const password = e.target.password.value;
+    //     if(password.length < 6){
+    //         setPassError('Password must be at least 6 characters');
+    //         return;
+    //     }
+    //     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
+    //     if(!regex.test(password)){
+    //         setPassError('Password must contain at least one uppercase letter, one lowercase letter, one digit , one special charecter')
+    //         return;
+    //     }   
         
-        const photo = e.target.photo.value;
+    //     const photo = e.target.photo.files[0];
+       
 
-        //console.log(name, email, password, photo)
+    //      // send img to imgbb
+    //    const img_url =  await imgUpload(photo);
+    //     console.log(img_url)
 
-        createNewUser(email, password)
-        .then(result => {
-            const user = result.user;
-            updateProfile(user, {
-                displayName: name,
-                photoURL: photo,
-            })
-            setUser(user);
-            Swal.fire({
-                title: 'Success!',
-                text: 'Congrates! Successfully Registered',
-                icon: 'success',
-                confirmButtonText: 'OK'
-              })
-            navigate('/');
-           // console.log(user)
-        })
-        .then(error =>{
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // console.log(errorCode, errorMessage);
-        })
+    //   // console.log(name, email, password)
+      
+
+    //     createNewUser(email, password)
+    //     .then(result => {
+    //         const user = result.user;
+    //         try {
+    //              updateProfile(user, {
+    //               displayName: name,
+    //               photoURL: img_url,
+    //             });
+    //             console.log("Profile updated successfully!");
+    //           } catch (error) {
+    //             console.error("Error updating profile:", error.message);
+    //           }
+    //         setUser(user);
+    //         Swal.fire({
+    //             title: 'Success!',
+    //             text: 'Congrates! Successfully Registered',
+    //             icon: 'success',
+    //             confirmButtonText: 'OK'
+    //           })
+    //         navigate('/');
+    //        // console.log(user)
+    //     })
+    //     .then(error =>{
+    //         // const errorCode = error.code;
+    //         // const errorMessage = error.message;
+    //          console.log(error);
+    //     })
 
 
-    }
+    // }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+      
+        // Clear previous errors
+        setError('');
+        setPassError('');
+      
+        const name = e.target.username.value;
+        if (name.length < 5) {
+          setError('Name must be at least 5 characters');
+          return;
+        }
+      
+        const email = e.target.email.value;
+      
+        const password = e.target.password.value;
+        if (password.length < 6) {
+          setPassError('Password must be at least 6 characters');
+          return;
+        }
+      
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
+        if (!regex.test(password)) {
+          setPassError(
+            'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
+          );
+          return;
+        }
+      
+        const photo = e.target.photo.files[0];
+        let img_url = '';
+      
+        try {
+          // Upload image to imgbb
+          img_url = await imgUpload(photo);
+      
+          if (!img_url) {
+            setError('Failed to upload image. Please try again.');
+            return;
+          }
+          console.log('Image URL:', img_url);
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          setError('Image upload failed. Please try again.');
+          return;
+        }
+      
+        try {
+          // Create a new user
+          const result = await createNewUser(email, password);
+          const user = result.user;
+
+          // send userInfo to db
+          const userInfo = {
+            name: name,
+            email: user.email,
+            photo: img_url,
+          }
+          await axios.post(`${import.meta.env.VITE_API_URL}/users/${user?.email}`, userInfo);
+
+          // Update user profile
+          await updateProfile(user, {
+            displayName: name,
+            photoURL: img_url,
+          });
+      
+          console.log('Profile updated successfully!');
+          setUser(user);
+      
+          Swal.fire({
+            title: 'Success!',
+            text: 'Congratulations! Successfully Registered',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+      
+          navigate('/');
+        } catch (error) {
+          console.error('Error during registration:', error);
+          setError('Registration failed. Please try again.');
+        }
+      };
+      
 
     return (
        
@@ -99,10 +197,18 @@ const Register = () => {
                 </div>
                 <div className="mb-5">
                     <label className="text-text-clr font-semibold text-base">User Photo</label><br></br>
-                    <input placeholder="Photo url" required type="text" name="photo" className="outline outline-gray-400 w-full h-11 rounded-lg px-5 mt-2" />
+                    {/* <input placeholder="Photo url" required type="text" name="photo" className="outline outline-gray-400 w-full h-11 rounded-lg px-5 mt-2" /> */}
+                    <input type="file" name="photo" className=" w-full
+                    h-11 rounded-lg px-2 mt-2" />
                     
                 </div>
-                <button className="btn hover:bg-info bg-info text-white font-bold text-lg px-8 py-2 rounded-3xl border border-white block w-fit mx-auto">Register</button>
+                <button className="btn hover:bg-info bg-info text-white font-bold text-lg px-8 py-2 rounded-3xl border border-white block w-fit mx-auto">
+                    {/* {
+                        loading ? <FaSpinner className="animate-spin inline-block w-5 h-5 text-white
+                        "/> : "Register"
+                    } */}
+                    Register
+                </button>
             </form>
 
             <p className="font-medium text-sm text-center mt-4">Already have an account?  <Link to={'/login'} className="text-info underline">Login here</Link></p>
