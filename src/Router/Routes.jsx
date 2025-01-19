@@ -6,9 +6,11 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import UpdateUserInfo from "../Pages/UpdateUserInfo";
 import Error from "../Pages/Error";
-import PrivateRoute from "../assets/PrivateRoute/PrivateRoute";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Statistics from "../Dashboard/Statistics";
+import AddMedicine from "../Dashboard/AddMedicine";
+import ProductDetails from "../Pages/ProductDetails";
 
 
 export  const router = createBrowserRouter([
@@ -33,6 +35,10 @@ export  const router = createBrowserRouter([
             {
               path: '/updateUserInfo',
               element: <UpdateUserInfo></UpdateUserInfo>
+            },
+            {
+              path: '/productDetails/:id',
+              element: <ProductDetails></ProductDetails>
             }
           ]
         },
@@ -50,6 +56,12 @@ export  const router = createBrowserRouter([
                 <Statistics></Statistics>
               </PrivateRoute>
             },
+            {
+              path: 'add-medicine',
+              element: <PrivateRoute>
+                <AddMedicine></AddMedicine>
+              </PrivateRoute>
+            }
           ]
         }
       ]);

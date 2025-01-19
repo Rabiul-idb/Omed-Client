@@ -15,7 +15,7 @@ export const imgUpload =  async imgData =>{
     );
 
     const photoURL = data.data.display_url;
-    console.log(photoURL);
+   // console.log(photoURL);
     return photoURL;
 
    } catch (error) {

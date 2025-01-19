@@ -11,6 +11,7 @@ const Sidebar = () => {
                     </Link>
                 </div>
                <NavLink to={'/dashboard'} className="btn flex justify-center items-center text-base">Statistics</NavLink>
+               <NavLink to={'/dashboard/add-medicine'} className="btn flex justify-center items-center text-base">Add Medicine</NavLink>
            
             </div>
     );
