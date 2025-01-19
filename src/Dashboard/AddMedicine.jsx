@@ -31,6 +31,7 @@ const AddMedicine = () => {
             ...data,
             price: parseFloat(data.price),
             quantity: parseInt(data.quantity),
+            discount: parseInt(data.discount),
             photo: img_url,
             seller,
          }
@@ -127,16 +128,18 @@ const AddMedicine = () => {
             />
           </div>
           <div>
-            <label>Description:</label>
+            <label>Discount:</label>
             <br></br>
-            <textarea
-              rows="5"
-              name="description"
-              placeholder="Description"
+            <input
+              type="number"
+              name="discount"
+              defaultValue={0}
+              placeholder="Discount"
               className="input input-bordered h-10 w-full"
-              {...register("description", { required:true})}
+              {...register("discount", { required:true})}
             />
           </div>
+          
           <div>
             <label>Image:</label>
             <br></br>
@@ -145,6 +148,17 @@ const AddMedicine = () => {
             />
           </div>
         </div>
+          <div>
+            <label>Description:</label>
+            <br></br>
+            <textarea
+              rows="5"
+              name="description"
+              placeholder="Description"
+              className="input input-bordered h-20 w-full"
+              {...register("description", { required:true})}
+            />
+          </div>
         <input type="submit" value="Add Product" className="btn bg-red-600 text-white mt-5" />
       </form>
     </div>

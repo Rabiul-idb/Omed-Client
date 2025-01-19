@@ -53,7 +53,11 @@ console.log(Product);
                     <div className="flex justify-between items-center">
                         <h3 className="text-2xl font-semibold">Price: {price}$</h3>
                         
-                        <Link className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">Purchase</Link>
+                        <Link className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">
+                            {
+                                quantity > 0 ? "Purchase" : "Out of Stock"
+                            }
+                        </Link>
                     </div>
                 </div>
            </div>

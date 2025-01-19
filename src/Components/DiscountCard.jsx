@@ -47,7 +47,7 @@ if(isLoading){
             // }}
             // autoplay={true}
             loop={true}
-            slidesPerView={3}
+            slidesPerView={4}
             spaceBetween={24}
             // navigation={true}
             // modules={[Pagination, Navigation, Autoplay]}
