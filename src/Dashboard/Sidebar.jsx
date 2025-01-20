@@ -15,8 +15,17 @@ const Sidebar = () => {
                     </Link>
                 </div>
                <NavLink to={'/dashboard'} className="btn flex justify-center items-center text-base">Statistics</NavLink>
+               
                <NavLink to={'/dashboard/add-medicine'} className="btn flex justify-center items-center text-base">Add Medicine</NavLink>
+               <NavLink to={'/dashboard/add-category'} className="btn flex justify-center items-center text-base">Add Category</NavLink>
                <NavLink to={'/dashboard/Cart'} className="btn flex justify-center items-center text-base">My Carts ({myCarts.length})</NavLink>
+
+               <div>
+                <NavLink to={'/'} className="btn flex justify-center items-center text-base">User Home</NavLink>
+                <NavLink to={'/shop'} className="btn flex justify-center items-center text-base">Shop</NavLink>
+                <NavLink to={'/updateUserInfo'} className="btn flex justify-center items-center text-base">Update Profile</NavLink>
+                
+               </div>
            
             </div>
     );

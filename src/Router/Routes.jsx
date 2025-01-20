@@ -14,6 +14,7 @@ import ProductDetails from "../Pages/ProductDetails";
 import Cart from "../Pages/Cart";
 import CheckOut from "../Pages/CheckOut";
 import Shop from "../Pages/Shop";
+import AddCategory from "../Pages/AddCategory";
 
 
 export  const router = createBrowserRouter([
@@ -67,6 +68,12 @@ export  const router = createBrowserRouter([
               path: 'add-medicine',
               element: <PrivateRoute>
                 <AddMedicine></AddMedicine>
+              </PrivateRoute>
+            },
+            {
+              path: 'add-category',
+              element: <PrivateRoute>
+                <AddCategory></AddCategory>
               </PrivateRoute>
             },
             {
