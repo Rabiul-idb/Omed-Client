@@ -6,7 +6,7 @@ import Loading from "../Components/Loading";
 
 const PrivateRoute = ({children}) => {
     
-    const {setUser, user, loading} = useContext(contextApi);
+    const {user, loading} = useContext(contextApi);
     const location = useLocation();
 
     if(loading){

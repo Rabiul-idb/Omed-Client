@@ -11,6 +11,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Statistics from "../Dashboard/Statistics";
 import AddMedicine from "../Dashboard/AddMedicine";
 import ProductDetails from "../Pages/ProductDetails";
+import Cart from "../Pages/Cart";
 
 
 export  const router = createBrowserRouter([
@@ -61,7 +62,13 @@ export  const router = createBrowserRouter([
               element: <PrivateRoute>
                 <AddMedicine></AddMedicine>
               </PrivateRoute>
-            }
+            },
+            {
+              path: 'cart',
+              element: <PrivateRoute>
+                <Cart></Cart>
+              </PrivateRoute>
+            },
           ]
         }
       ]);

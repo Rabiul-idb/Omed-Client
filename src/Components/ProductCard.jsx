@@ -22,9 +22,9 @@ const ProductCard = ({product}) => {
         <p className="text-base font-bold text-black">
           $ <span>{price}</span>
         </p>
-        <Link to={`/products/${_id}`} className="btn">
+        {/* <Link to={`/products/${_id}`} className="btn">
           <FaCartPlus />
-        </Link>
+        </Link> */}
         <Link to={`/productDetails/${_id}`} className="btn">
           <FaEye />
         </Link>

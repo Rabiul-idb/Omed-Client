@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from '../../assets/images/logo.png'
 import { FaBars } from "react-icons/fa";
 import { useContext, useState } from "react";
@@ -11,6 +11,7 @@ const Navbar = () => {
     
     const {user, setUser, logOut} = useContext(contextApi);
     const [show, setShow] = useState(false);
+    const navigate  = useNavigate();
 
 
     const handleLogOut = ()=>{
@@ -23,6 +24,7 @@ const Navbar = () => {
                 confirmButtonText: 'OK'
             })
             setUser(null);
+            navigate('/')
           }).catch((error) => {
             alert(error);
         });

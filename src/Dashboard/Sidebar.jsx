@@ -1,7 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/images/logo.png';
+import useCart from "../Hooks/useCart";
 
 const Sidebar = () => {
+
+    const [myCarts] = useCart();
+    
     return (
         
             <div className="w-[280px] border-r-2 bg-[#fef5ee] text-center">
@@ -12,6 +16,7 @@ const Sidebar = () => {
                 </div>
                <NavLink to={'/dashboard'} className="btn flex justify-center items-center text-base">Statistics</NavLink>
                <NavLink to={'/dashboard/add-medicine'} className="btn flex justify-center items-center text-base">Add Medicine</NavLink>
+               <NavLink to={'/dashboard/Cart'} className="btn flex justify-center items-center text-base">My Carts ({myCarts.length})</NavLink>
            
             </div>
     );

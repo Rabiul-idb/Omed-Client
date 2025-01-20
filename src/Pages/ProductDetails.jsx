@@ -2,29 +2,79 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Loading from "../Components/Loading";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import useCart from "../Hooks/useCart";
 
 
 const ProductDetails = () => {
 
-const {id} = useParams();
-    
-console.log(id);
+        const {id} = useParams();
+        const {user  } = useAuth();
+        const axiosSecure = useAxiosSecure();
+        const location = useLocation();
+        const navigate = useNavigate();
+        const [, refetch] = useCart();
 
-const {data : Product =[], isLoading, refetch} = useQuery({
-    queryKey: ['Product', id],
-    queryFn: async () => {
-        const response = await axios(`${import.meta.env.VITE_API_URL}/productDetails/${id}`)
-        return response.data;
-    },
-});
-if(isLoading){
-    return <Loading></Loading>
-}
+    const {data : Product =[], isLoading} = useQuery({
+        queryKey: ['Product', id],
+        queryFn: async () => {
+            const response = await axios(`${import.meta.env.VITE_API_URL}/productDetails/${id}`)
+            return response.data;
+        },
+    });
+    if(isLoading){
+        return <Loading></Loading>
+    }
 
 const {_id, brand_name, generic_name, brand, category, price, discount, quantity, description, photo, seller} = Product || {};
-console.log(Product);
+//console.log(Product);
 
+
+const handleAddToCart = () =>{
+    if(user && user?.email){
+        const cartItems = {
+            productId: _id,
+            brand_name,
+            brand,
+            price,
+            photo,
+            discount,
+            quantity,
+            seller,
+            email: user?.email,
+        }
+        axiosSecure.post('/myCarts', cartItems)
+        .then(res => {
+            if(res.data.insertedId){
+                Swal.fire({
+                    title: 'Success',
+                    text: `${brand_name} is Added to your Cart`,
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                });
+                refetch();
+            }
+        })
+    }
+    else{
+        Swal.fire({
+            title: "You are not Logged In",
+            text: "Please Login to add cart",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Login!",
+          }).then(result => {
+            if (result.isConfirmed) {
+                navigate('/login');
+            }
+          })
+    }
+}
 
     return (
         <div className="w-11/12 mx-auto">
@@ -53,14 +103,27 @@ console.log(Product);
                     <div className="flex justify-between items-center">
                         <h3 className="text-2xl font-semibold">Price: {price}$</h3>
                         
-                        <Link className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">
+                        <button onClick={handleAddToCart} disabled={quantity <= 0 ? true : false} className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">
                             {
-                                quantity > 0 ? "Purchase" : "Out of Stock"
+                                quantity > 0 ? "Add To Cart" : "Out of Stock"
                             }
-                        </Link>
+                        </button>
                     </div>
                 </div>
            </div>
+
+           {/* <button className="btn" onClick={()=>document.getElementById('my_modal_2').showModal()}>open modal</button> */}
+            <dialog id="my_modal_2" className="modal">
+            <div className="modal-box">
+                <h3 className="font-bold text-lg">{brand}</h3>
+                <p className="py-4">{quantity}</p>
+            </div>
+            <form method="dialog" className="modal-backdrop">
+                <button>close</button>
+            </form>
+            </dialog>
+
+
         </div>
     );
 };

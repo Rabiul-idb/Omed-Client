@@ -18,6 +18,7 @@ const Login = () => {
   const [error, setError] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
+console.log(location.state);
 
   // user Login by email password
   const handleUserLogin = (e) => {
