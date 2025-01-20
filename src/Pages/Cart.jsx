@@ -6,11 +6,15 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { MdDeleteForever } from "react-icons/md";
+import useAuth from "../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [myCarts, refetch] = useCart();
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth();
   const [quantities, setQuantities] = useState(myCarts.map(() => 1)); 
+  const navigate = useNavigate();
 
 
   const handleValueChange = (index, value) => {
@@ -23,6 +27,9 @@ const Cart = () => {
     const total = myCarts.reduce((acc, item, index) => acc + item.price * quantities[index], 0);
     const grandTotal = parseInt(total) -5;
      
+ 
+  
+
   const handleDeleteCart = async(id) =>{
     // await axiosSecure.delete(`/myCarts/${id}`)
     // .then((response) => {
@@ -56,6 +63,42 @@ const Cart = () => {
         })
         
     }
+
+    const handlePurchase = async()=>{
+
+        const orderInfo ={
+            "product-item": myCarts.length,
+            "shipping-fee": parseInt(10),
+            'discount': 15,
+            "total-bill": grandTotal,
+            "order-status": "pending",
+            "order-date": new Date().toLocaleString(),
+            "customer-name": user?.displayName,
+            "customer-email": user?.email,
+            
+        }
+
+         console.log(orderInfo);
+         
+         if(myCarts.length > 0){
+            await axiosSecure.post('/orders', orderInfo)
+            navigate('/dashboard/checkOut');
+         }else{
+          Swal.fire({
+            title: "Not Found!",
+            icon: "warning",
+            text: "You have no Product in your cart",
+            confirmButtonText: "Shop Now",
+
+          }).then(result =>{
+            if(result.isConfirmed){
+              navigate('/');
+            }
+          });
+         }
+    }
+
+
   return (
     <div>
       <h2 className="text-2xl font-bold text-center mb-3">My Cart</h2>
@@ -128,11 +171,11 @@ const Cart = () => {
               </div>
               <div className="flex justify-between items-center mb-2">
                 <p className="text-base font-medium">Shipping</p>
-                <p className="text-base font-medium">$10</p>
+                <p className="text-base font-medium">+ $10</p>
               </div>
               <div className="flex justify-between items-center">
                 <p className="text-base font-medium">Discount</p>
-                <p className="text-base font-medium">$15</p>
+                <p className="text-base font-medium">- $15</p>
               </div>
               <hr className="my-2 "></hr>
               <div className="flex justify-between items-center">
@@ -140,7 +183,7 @@ const Cart = () => {
                 <p className="text-base font-medium">${grandTotal}</p>
               </div>
 
-              <button className="btn mt-5 w-full bg-red-600 text-white hover:bg-red-700 hover:text-white">CheckOut</button>
+              <button onClick={handlePurchase} className="btn mt-5 w-full bg-red-600 text-white hover:bg-red-700 hover:text-white">CheckOut</button>
         </div>
       </div>
     </div>

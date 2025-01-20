@@ -43,7 +43,7 @@ const Navbar = () => {
         <div>
             <ul className="hidden lg:flex gap-6 ">
                 <li><NavLink  to={"/"} className="text-base font-semibold">Home</NavLink></li>
-                <li><NavLink to={"/allFoods"} className="text-base font-semibold">All Foods</NavLink></li>
+                <li><NavLink to={"/shop"} className="text-base font-semibold">Shop</NavLink></li>
                 {/* {
                     user?.email && (<li><NavLink to={"/dashboard"} className="text-base font-semibold">Dashboard</NavLink></li>) 
                 } */}

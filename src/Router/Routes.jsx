@@ -12,6 +12,8 @@ import Statistics from "../Dashboard/Statistics";
 import AddMedicine from "../Dashboard/AddMedicine";
 import ProductDetails from "../Pages/ProductDetails";
 import Cart from "../Pages/Cart";
+import CheckOut from "../Pages/CheckOut";
+import Shop from "../Pages/Shop";
 
 
 export  const router = createBrowserRouter([
@@ -24,6 +26,10 @@ export  const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
+            },
+            {
+                path: '/shop',
+                element: <Shop></Shop>,
             },
             {
               path: '/login',
@@ -67,6 +73,12 @@ export  const router = createBrowserRouter([
               path: 'cart',
               element: <PrivateRoute>
                 <Cart></Cart>
+              </PrivateRoute>
+            },
+            {
+              path: 'checkOut',
+              element: <PrivateRoute>
+                <CheckOut></CheckOut>
               </PrivateRoute>
             },
           ]

@@ -7,7 +7,7 @@ import Loading from "./Loading";
 
 const TopSelling = () => {
 
-    const {data : allProducts, isLoading} = useQuery({
+    const {data : allProducts, isLoading, refetch} = useQuery({
         queryKey: ['allProducts'],
         queryFn: async () => {
             const response = await axios(`${import.meta.env.VITE_API_URL}/allProducts`)
@@ -15,12 +15,15 @@ const TopSelling = () => {
         },
         
     });
-
-    console.log(allProducts)
-    
     if(isLoading){
         return <Loading></Loading>
     }
+    refetch();
+  
+  //console.log(allProducts)
+    
+    
+    
 
     return (
         <div className="w-11/12 mx-auto pb-14">

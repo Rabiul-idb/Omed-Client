@@ -11,6 +11,7 @@ const AuthContext = ({children}) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [allItems , setAllItems] = useState([]);
 
  
     
@@ -69,6 +70,8 @@ const AuthContext = ({children}) => {
         logOut,
         loading,
         setLoading,
+        setAllItems,
+        allItems,
     }
 
 
