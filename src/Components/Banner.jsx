@@ -17,7 +17,7 @@ import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
 export default function Banner() {
   return (
-    <div className='my-2'>
+    <div className=''>
       <Swiper
         pagination={{
           type: 'fraction',
