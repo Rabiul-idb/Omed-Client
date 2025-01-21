@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Loading from '../Components/Loading';
 import { axiosSecure } from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
@@ -6,8 +6,11 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
 import AddCategory from '../Modals/AddCategory';
 import Swal from 'sweetalert2';
+import UpdateCategory from '../Modals/UpdateCategory';
 
 const ManageCategory = () => {
+
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const {data : categories, isLoading, refetch} = useQuery({
         queryKey: ['categories'],
@@ -89,7 +92,7 @@ const ManageCategory = () => {
                         </td>
                         <td>{category.category}</td>
                         <th className='space-x-4'>
-                        <button className="btn btn-ghost btn-xs">
+                        <button onClick={() => setSelectedItem(category)} className="btn btn-ghost btn-xs">
                             <FaEdit className="text-xl text-info" /></button>
                         <button onClick={()=> handleDeleteCategory(category._id)} className="btn btn-ghost btn-xs">
                             <MdDeleteForever className="text-2xl text-red-600" />
@@ -105,6 +108,11 @@ const ManageCategory = () => {
                 </table>
             </div>
             <AddCategory refetch={refetch}></AddCategory>
+            {
+                selectedItem && (
+                    <UpdateCategory selectedItem={selectedItem} setSelectedItem={setSelectedItem}></UpdateCategory>
+                )
+            }
 
         </div>
     );

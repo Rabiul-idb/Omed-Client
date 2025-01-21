@@ -95,8 +95,6 @@ const AddCategory = ({refetch}) => {
                     />
                 </div><input type="submit" value="Add Category" className="btn mt-5" />
             </form>
-
-
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
