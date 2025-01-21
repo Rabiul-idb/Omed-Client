@@ -15,6 +15,7 @@ import Cart from "../Pages/Cart";
 import CheckOut from "../Pages/CheckOut";
 import Shop from "../Pages/Shop";
 import AddCategory from "../Pages/AddCategory";
+import CategoryItems from "../Pages/CategoryItems";
 
 
 export  const router = createBrowserRouter([
@@ -31,6 +32,10 @@ export  const router = createBrowserRouter([
             {
                 path: '/shop',
                 element: <Shop></Shop>,
+            },
+            {
+                path: '/medicines/:category',
+                element: <CategoryItems></CategoryItems>,
             },
             {
               path: '/login',

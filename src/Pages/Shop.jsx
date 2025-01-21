@@ -1,43 +1,71 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Loading from "../Components/Loading";
 import ProductRow from "../Components/ProductRow";
 import ItemDetails from "../Modals/ItemDetails";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Shop = () => {
-  const {
-    data: allItems,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["allItems"],
-    queryFn: async () => {
-      const response = await axios(
-        `${import.meta.env.VITE_API_URL}/allProducts`
-      );
-      return response.data;
-    },
-  });
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
-  refetch();
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedValue, setSelectedValue] = useState('default');
+    const [sortedMedicine, setSortedMedicine] = useState([])
+    const axiosSecure = useAxiosSecure();
 
-  //console.log(allProducts)
+   // Fetch all items using React Query
+    const { data: allItems = [], isLoading } = useQuery({
+        queryKey: ["allItems"],
+        queryFn: async () => {
+            const response = await axiosSecure.get(`/allProducts`);
+            return response.data;
+        },
+    });
 
-  const [selectedItem, setSelectedItem] = useState(null);
+    
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    
+    const handleSelect = (e) => {
+        setSelectedValue(e.target.value);
+    };
+
+   
+    useEffect(() => {
+        if (selectedValue !== "default") {
+            const sortedData = allItems.filter((item) => item.brand === selectedValue);
+            setSortedMedicine(sortedData);
+        } else {
+            setSortedMedicine(allItems);
+        }
+    }, [selectedValue, allItems]);
+
 
   return (
     <div className="w-11/12 mx-auto pb-14">
       <div className=" flex justify-between items-center">
-        <h2 className="font-bold text-2xl my-7">All Avilable Medicines ({allItems.length}) </h2>
-        <Link className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">
-          See ALL
-        </Link>
+        <h2 className="font-bold text-2xl my-7">All Avilable Medicines ({sortedMedicine.length}) </h2>
+        <div className="text-right mb-5">
+          <span className="">Short by Company:</span>
+          <select
+            value={selectedValue}
+            onChange={handleSelect}
+            name=""
+            className="border px-2 py-1 ml-2"
+            id=""
+          >
+            <option value="default">Default</option>
+            <option value="square">Square</option>
+            <option value="beximco">Beximco</option>
+            <option value="incepta">Incepta</option>
+            <option value="opsonin">Opsonin</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="drag">drag</option>
+          </select>
+        </div>
       </div>
-      {allItems && allItems.length > 0 ? (
+      {sortedMedicine && sortedMedicine.length > 0 ? (
         <>
           <div className="overflow-x-auto">
             <table className="table">
@@ -57,9 +85,9 @@ const Shop = () => {
               <tbody>
                 
                 {
-                    allItems.map((item, index) => <>
+                    sortedMedicine.map((item, index) => <>
                         <ProductRow item={item} index={index} setSelectedItem={setSelectedItem}></ProductRow>
-                    {/* <ItemDetails itemId={item._id}></ItemDetails> */}
+                    
                     </>)
                         
                 }

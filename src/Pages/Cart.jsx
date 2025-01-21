@@ -101,7 +101,7 @@ const Cart = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-center mb-3">My Cart</h2>
+      <h2 className="text-2xl font-bold text-center mb-3">My Cart Items ({myCarts.length})</h2>
       <div className="flex gap-5">
         <div className="overflow-x-auto border rounded-md">
           <table className="table">

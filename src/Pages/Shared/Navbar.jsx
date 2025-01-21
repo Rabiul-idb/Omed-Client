@@ -34,7 +34,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="  bg-[#fef5ee]">
+        <div className=" menubar bg-[#fef5ee]">
         <div className="navbar  flex justify-between items-center w-11/12 mx-auto">
         <div className="">
             <img src={logo} className="w-12" alt="" />
