@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Dashboard/Sidebar";
-import Footer from "../Pages/Shared/Footer";
 
 const DashboardLayout = () => {
   return (
@@ -14,7 +13,7 @@ const DashboardLayout = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+     
     </div>
   );
 };

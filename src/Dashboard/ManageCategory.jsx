@@ -110,7 +110,7 @@ const ManageCategory = () => {
             <AddCategory refetch={refetch}></AddCategory>
             {
                 selectedItem && (
-                    <UpdateCategory selectedItem={selectedItem} setSelectedItem={setSelectedItem}></UpdateCategory>
+                    <UpdateCategory selectedItem={selectedItem} setSelectedItem={setSelectedItem} refetch={refetch}></UpdateCategory>
                 )
             }
 

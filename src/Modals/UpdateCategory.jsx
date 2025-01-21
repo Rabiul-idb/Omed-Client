@@ -1,9 +1,13 @@
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useState } from "react";
+import { imgUpload } from "../api/utils";
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
 
-const UpdateCategory = ({ selectedItem, setSelectedItem }) => {
+const UpdateCategory = ({ selectedItem, setSelectedItem, refetch }) => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth();
 
   const {
     register,
@@ -12,8 +16,41 @@ const UpdateCategory = ({ selectedItem, setSelectedItem }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const {_id, photo, category , cat_description} = selectedItem || {};
+
+  const onSubmit = async(data) => {
+
+        const image = data.photo[0];
+                      //console.log(image)
+        let img_url = '';
+
+        img_url = await imgUpload(image);
+   // console.log(data);
+    const updatedInfo = {
+        ...data,
+        photo: img_url,
+        updatedBy: user?.email,
+        UpdatedTime: new Date().toLocaleString(),
+    }
+    console.log(updatedInfo)
+
+    try {
+        await axiosSecure.put(`/updateCategory/${_id}`,updatedInfo)
+        .then(res => {
+            if(res.data.modifiedCount > 0){
+                refetch();
+                setSelectedItem(null);
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Category Updated Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'ok'
+                })
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
   };
 
   return (
@@ -34,6 +71,7 @@ const UpdateCategory = ({ selectedItem, setSelectedItem }) => {
               <br></br>
               <select
                 name="category"
+                defaultValue={selectedItem.category}
                 className="input input-bordered h-10 w-full"
                 {...register("category", { required: true })}
               >
@@ -55,6 +93,7 @@ const UpdateCategory = ({ selectedItem, setSelectedItem }) => {
               <input
                 type="text"
                 name="cat_description"
+                defaultValue={selectedItem.cat_description}
                 placeholder="Category description"
                 className="input input-bordered h-10 w-full"
                 {...register("cat_description", { required: true })}
@@ -67,7 +106,7 @@ const UpdateCategory = ({ selectedItem, setSelectedItem }) => {
                 type="file"
                 name="img"
                 className=" h-10 w-full"
-                {...register("photo", { required: true })}
+                {...register("photo", {required: true})}
               />
             </div>
             <input type="submit" value="Update Category" className="btn mt-5" />
