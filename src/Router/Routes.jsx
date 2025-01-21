@@ -16,6 +16,7 @@ import CheckOut from "../Pages/CheckOut";
 import Shop from "../Pages/Shop";
 import AddCategory from "../Pages/AddCategory";
 import CategoryItems from "../Pages/CategoryItems";
+import ManageCategory from "../Dashboard/ManageCategory";
 
 
 export  const router = createBrowserRouter([
@@ -79,6 +80,12 @@ export  const router = createBrowserRouter([
               path: 'add-category',
               element: <PrivateRoute>
                 <AddCategory></AddCategory>
+              </PrivateRoute>
+            },
+            {
+              path: 'manage-category',
+              element: <PrivateRoute>
+                <ManageCategory></ManageCategory>
               </PrivateRoute>
             },
             {
