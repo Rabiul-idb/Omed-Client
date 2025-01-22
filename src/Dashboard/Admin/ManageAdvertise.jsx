@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Components/Loading";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import { useEffect, useState } from "react";
 
 
 const ManageAdvertise = () => {
 
-
+    const {setActiveAds} = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [pendingAds, setPendingAds] = useState([]);
 
     const { data: all_ads =[], isLoading, refetch} = useQuery({
         queryKey: ["all_ads"],
@@ -15,6 +18,30 @@ const ManageAdvertise = () => {
             return response.data;
         }
     })
+
+    // handle toggle status
+    const handleToggle = async(id, currentStatus) =>{
+      try {
+        await axiosSecure.put(`/toggleStatus/${id}` ,{
+          status: currentStatus === 'pending' ? 'active' : 'pending',
+        })
+        refetch();
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    useEffect(() => {
+      if (all_ads.length > 0) {
+        const activeAd = all_ads.filter((adItem) => adItem.status === "active");
+        const pendingAd = all_ads.filter((adItem) => adItem.status === "pending");
+  
+        setActiveAds(activeAd);
+        setPendingAds(pendingAd);
+      }
+    }, [all_ads]);
+
+
     if(isLoading){
         return <Loading/>
     }
@@ -23,7 +50,7 @@ const ManageAdvertise = () => {
         <div>
             <div>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">All Advertisements</h2>
+        <h2 className="text-2xl font-bold">Active Advertisements</h2>
       </div>
 
       <div className="overflow-x-auto">
@@ -37,9 +64,10 @@ const ManageAdvertise = () => {
               <th>AD_Photo</th>
               <th>Ad_Name</th>
               <th>Description</th>
-              <th>My Info</th>
+              <th>Seller Info</th>
               <th>Requested Date</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -61,7 +89,7 @@ const ManageAdvertise = () => {
                 </td>
                 <td>{ad.req_date}</td>
                 <th className="space-x-4">
-                  <button className={`btn btn-ghost btn-xs ${ad.status === 'pending' ? 'text-yellow-600' : 'bg-green-700'}`}>
+                  <button className={`btn cursor-default btn-ghost btn-xs ${ad.status === 'pending' ? 'text-yellow-600' : 'bg-green-700'}`}>
                     {ad.status}
                   </button>
                   {/* <button
@@ -70,6 +98,9 @@ const ManageAdvertise = () => {
                   >
                     <MdDeleteForever className="text-2xl text-red-600" />
                   </button> */}
+                </th>
+                <th>
+                  <input onChange={()=> handleToggle(ad._id, ad.status)} type="checkbox" className="toggle" defaultChecked = {ad.status === 'active'} />
                 </th>
               </tr>
             ))}

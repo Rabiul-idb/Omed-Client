@@ -67,7 +67,7 @@ const Advertisement = () => {
                 </td>
                 <td>{ad.req_date}</td>
                 <th className="space-x-4">
-                  <button className={`btn btn-ghost btn-xs ${ad.status === 'pending' ? 'text-yellow-600' : 'bg-green-700'}`}>
+                  <button className={`btn cursor-default btn-ghost btn-xs ${ad.status === 'pending' ? 'text-yellow-600' : 'bg-green-700'}`}>
                     {ad.status}
                   </button>
                   {/* <button

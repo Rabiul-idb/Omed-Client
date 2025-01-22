@@ -16,7 +16,7 @@ const Sidebar = () => {
                 </div>
                   {/* admin routes for everyone ====================================== */}
 
-               <NavLink to={'/dashboard'} className="btn flex justify-center items-center text-base">Statistics</NavLink>
+               <NavLink to={'/dashboard/statistics'} className="btn flex justify-center items-center text-base">Statistics</NavLink>
                
                <NavLink to={'/dashboard/manage-category'} className="btn flex justify-center items-center text-base">Manage Category</NavLink>
                <NavLink to={'/dashboard/manage-advertisement'} className="btn flex justify-center items-center text-base">Manage Advertisement</NavLink>
