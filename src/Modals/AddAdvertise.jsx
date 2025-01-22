@@ -71,9 +71,9 @@ const AddAdvertise = ({refetch}) => {
                     />
                 </div>
                 <div>
-                    <label>Image:</label>
+                    <label>Image: <span className="text-sm">should be (1339 x 477)</span></label>
                     <br></br>
-                    <input type="file" name="img" className=" h-10 w-full" 
+                    <input type="file" name="img" className=" h-10 w-full mt-2" 
                     {...register("ad_photo", { required:true})}
                     />
                 </div><input type="submit" value="Send Request" className="btn mt-5" />

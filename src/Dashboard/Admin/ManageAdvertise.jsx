@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const ManageAdvertise = () => {
 
-    const {setActiveAds} = useAuth();
+    const {activeAds, setActiveAds} = useAuth();
     const axiosSecure = useAxiosSecure();
     const [pendingAds, setPendingAds] = useState([]);
 
@@ -49,8 +49,9 @@ const ManageAdvertise = () => {
     return (
         <div>
             <div>
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Active Advertisements</h2>
+      <div className="flex gap-10 items-center mb-4 ">
+        <h2 className="text-xl font-semibold">Active Ads ({activeAds.length}),</h2>
+        <h2 className="text-xl font-semibold">Pending Ads ({pendingAds.length})</h2>
       </div>
 
       <div className="overflow-x-auto">
