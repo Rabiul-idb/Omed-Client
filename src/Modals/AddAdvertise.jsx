@@ -4,7 +4,7 @@ import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const AddAdvertise = () => {
+const AddAdvertise = ({refetch}) => {
 
     const {handleSubmit, register, reset, formState: { errors }} = useForm();
     const {user} = useAuth();
@@ -29,11 +29,11 @@ const AddAdvertise = () => {
         //console.log(adInfo);
         // now save to adCollection
         try {
-            await axiosSecure.post('/advertises', adInfo)
+            await axiosSecure.post('/advertise', adInfo)
             .then(res => {
                 if(res.data.insertedId){
                     document.getElementById("my_modal_2").close()
-                    // refetch();
+                     refetch();
                     Swal.fire({
                         title: 'Request Sent',
                         text: ' Request Sent Successfully',

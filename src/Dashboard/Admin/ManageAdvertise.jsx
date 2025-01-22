@@ -1,18 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import AddAdvertise from "../Modals/AddAdvertise";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
-import useAuth from "../Hooks/useAuth";
-import Loading from "../Components/Loading";
+import Loading from "../../Components/Loading";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
-const Advertisement = () => {
+
+const ManageAdvertise = () => {
+
 
     const axiosSecure = useAxiosSecure();
-    const {user} = useAuth();
 
-    const { data: my_ads =[], isLoading, refetch} = useQuery({
-        queryKey: ["my_ads"],
+    const { data: all_ads =[], isLoading, refetch} = useQuery({
+        queryKey: ["all_ads"],
         queryFn: async () =>{
-            const response = await axiosSecure.get(`/advertises/${user?.email}`)
+            const response = await axiosSecure.get(`/advertises`)
             return response.data;
         }
     })
@@ -20,16 +19,11 @@ const Advertisement = () => {
         return <Loading/>
     }
 
-  return (
-    <div>
+    return (
+        <div>
+            <div>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">My Advertisements</h2>
-        <button
-          onClick={() => document.getElementById("my_modal_2").showModal()}
-          className="btn"
-        >
-          + Add Advertise
-        </button>
+        <h2 className="text-2xl font-bold">All Advertisements</h2>
       </div>
 
       <div className="overflow-x-auto">
@@ -50,7 +44,7 @@ const Advertisement = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {my_ads.map((ad, index) => (
+            {all_ads.map((ad, index) => (
               <tr className="hover:bg-slate-100">
                 <th>
                   <label>{index + 1}</label>
@@ -83,9 +77,10 @@ const Advertisement = () => {
         </table>
       </div>
 
-      <AddAdvertise refetch={refetch}></AddAdvertise>
+      
     </div>
-  );
+        </div>
+    );
 };
 
-export default Advertisement;
+export default ManageAdvertise;

@@ -18,6 +18,7 @@ import AddCategory from "../Pages/AddCategory";
 import CategoryItems from "../Pages/CategoryItems";
 import ManageCategory from "../Dashboard/ManageCategory";
 import Advertisement from "../Dashboard/Advertisement";
+import ManageAdvertise from "../Dashboard/Admin/ManageAdvertise";
 
 
 export  const router = createBrowserRouter([
@@ -87,6 +88,12 @@ export  const router = createBrowserRouter([
               path: 'manage-category',
               element: <PrivateRoute>
                 <ManageCategory></ManageCategory>
+              </PrivateRoute>
+            },
+            {
+              path: 'manage-advertisement',
+              element: <PrivateRoute>
+                <ManageAdvertise></ManageAdvertise>
               </PrivateRoute>
             },
             {
