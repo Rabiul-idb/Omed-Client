@@ -1,14 +1,17 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaCartPlus } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { contextApi } from "../../AuthContex/AuthContext";
 import Swal from "sweetalert2";
+import { TiShoppingCart } from "react-icons/ti";
+import useCart from "../../Hooks/useCart";
 
 const Navbar = () => {
   const { user, setUser, logOut } = useContext(contextApi);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const [myCarts] = useCart();
 
   const handleLogOut = () => {
     logOut()
@@ -62,9 +65,13 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="">
-          <div className="hidden lg:block font-semibold text-black text-lg mr-2">
+          {/* <div className="hidden lg:block font-semibold text-black text-lg mr-2">
             {user && user?.email ? user?.displayName : ""}
-          </div>
+          </div> */}
+          <Link to={'/dashboard/Cart'} className=" rounded-full border-gray-400 p-2 mr-3 relative">
+            <TiShoppingCart className="text-2xl"  />
+            <span className="absolute -top-1 right-0 text-red-700">{myCarts.length}</span>
+          </Link>
 
           {user && user?.email ? (
             <div className="dropdown dropdown-end">
