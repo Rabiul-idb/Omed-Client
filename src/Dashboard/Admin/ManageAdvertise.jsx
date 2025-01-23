@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Components/Loading";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
 
 
 const ManageAdvertise = () => {
 
-    const {activeAds, setActiveAds} = useAuth();
-    const axiosSecure = useAxiosSecure();
-    const [pendingAds, setPendingAds] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  const [activeAds, setActiveAds] = useState([]);
+  const [pendingAds, setPendingAds] = useState([]);
 
     const { data: all_ads =[], isLoading, refetch} = useQuery({
         queryKey: ["all_ads"],

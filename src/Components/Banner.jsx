@@ -6,20 +6,41 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-// import slide1 from '../../src/assets/images/slider1.webp';
-// import slide2 from '../../src/assets/images/slider2.webp';
-// import slide3 from '../../src/assets/images/slider3.webp';
-
-
-
 // import required modules
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
-import useAuth from '../Hooks/useAuth';
+import Loading from './Loading';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 export default function Banner() {
 
-  const {activeAds} = useAuth();
- // console.log(activeAds.length);
+  const [activeAds, setActiveAds] = useState([]);
+  const axiosSecure = useAxiosSecure();
+
+  const { data: all_ads =[], isLoading} = useQuery({
+    queryKey: ["all_ads"],
+    queryFn: async () =>{
+        const response = await axiosSecure.get(`/advertises`)
+        return response.data;
+    }
+  });
+
+  useEffect(() => {
+    if (all_ads.length > 0) {
+       const activeAd = all_ads.filter((adItem) => adItem.status === "active");
+      setActiveAds(activeAd);
+    }
+  }, [all_ads]);
+
+  
+
+  if(isLoading){
+      return <Loading/>
+  }
+
+  const hasEnoughSlides = activeAds.length > 1; // for swiper slide looping
+
 
   return (
     <div className=''>
@@ -28,7 +49,7 @@ export default function Banner() {
           type: 'fraction',
         }}
         autoplay={true}
-        loop={true}
+        loop={hasEnoughSlides}
         navigation={true}
         modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper"
@@ -42,19 +63,6 @@ export default function Banner() {
           )
         }
 
-        
-        {/* <SwiperSlide>
-
-              <img src={slide2} className='object-cover w-full' alt="" />
-           
-        </SwiperSlide>
-        <SwiperSlide>
-
-              <img src={slide3} className='object-cover w-full' alt="" />
-
-        </SwiperSlide> */}
-       
-        
       </Swiper>
     </div>
   );
