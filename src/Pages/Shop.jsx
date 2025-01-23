@@ -22,16 +22,10 @@ const Shop = () => {
     });
 
     
-    if (isLoading) {
-        return <Loading />;
-    }
-
-    
     const handleSelect = (e) => {
         setSelectedValue(e.target.value);
     };
 
-   
     useEffect(() => {
         if (selectedValue !== "default") {
             const sortedData = allItems.filter((item) => item.brand === selectedValue);
@@ -40,6 +34,11 @@ const Shop = () => {
             setSortedMedicine(allItems);
         }
     }, [selectedValue, allItems]);
+
+     
+    if (isLoading) {
+      return <Loading />;
+  }
 
 
   return (
