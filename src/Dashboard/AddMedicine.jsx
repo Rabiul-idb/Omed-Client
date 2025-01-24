@@ -4,7 +4,7 @@ import useAuth from "../Hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const AddMedicine = () => {
+const AddMedicine = ({refetch}) => {
 
     const {user} = useAuth();
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
@@ -34,19 +34,26 @@ const AddMedicine = () => {
             discount: parseInt(data.discount),
             photo: img_url,
             seller,
+            date: new Date().toLocaleString(),
          }
          //console.log(productData);
 
          // save to db
          try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/products`, productData);
-            Swal.fire({
-                title: 'Success!',
-                text: 'Product Added Successfully',
-                icon: 'success',
-                confirmButtonText: 'OK',
-            });
-            reset();
+            await axios.post(`${import.meta.env.VITE_API_URL}/products`, productData)
+            .then((res) => {
+              if(res.data.insertedId){
+                document.getElementById("my_modal_2").close()
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Product Added Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                });
+                refetch();
+                reset();
+              }
+            })
          } catch (error) {
             console.log(error)
          }
@@ -56,7 +63,7 @@ const AddMedicine = () => {
     <div>
         <h2 className="text-2xl font-bold mb-5 text-center">Add Medicine</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-6">
           <div className="">
             <label>Brand Name:</label>
             <br></br>
@@ -139,15 +146,7 @@ const AddMedicine = () => {
               {...register("discount", { required:true})}
             />
           </div>
-          
-          <div>
-            <label>Image:</label>
-            <br></br>
-            <input type="file" name="img" className=" h-10 w-full" 
-            {...register("photo", { required:true})}
-            />
-          </div>
-        </div>
+
           <div>
             <label>Description:</label>
             <br></br>
@@ -159,7 +158,17 @@ const AddMedicine = () => {
               {...register("description", { required:true})}
             />
           </div>
-        <input type="submit" value="Add Product" className="btn bg-red-600 text-white mt-5" />
+          
+          <div>
+            <label>Image:</label>
+            <br></br>
+            <input type="file" name="img" className=" h-10 w-full" 
+            {...register("photo", { required:true})}
+            />
+          </div>
+        </div>
+          <input type="submit" value="Add Medicine" className="btn bg-red-600 text-white mt-5" />
+
       </form>
     </div>
   );

@@ -20,6 +20,7 @@ import ManageCategory from "../Dashboard/ManageCategory";
 import Advertisement from "../Dashboard/Advertisement";
 import ManageAdvertise from "../Dashboard/Admin/ManageAdvertise";
 import ManageUser from "../Dashboard/Admin/ManageUser";
+import ManageMedicine from "../Dashboard/Seller/ManageMedicine";
 
 
 export  const router = createBrowserRouter([
@@ -77,6 +78,12 @@ export  const router = createBrowserRouter([
               path: 'add-medicine',
               element: <PrivateRoute>
                 <AddMedicine></AddMedicine>
+              </PrivateRoute>
+            },
+            {
+              path: 'manage-medicine',
+              element: <PrivateRoute>
+                <ManageMedicine></ManageMedicine>
               </PrivateRoute>
             },
             {

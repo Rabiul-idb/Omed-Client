@@ -25,7 +25,8 @@ const Sidebar = () => {
 
                 {/* seller routes for everyone ====================================== */}
 
-               <NavLink to={'/dashboard/add-medicine'} className="btn flex justify-center items-center text-base">Add Medicine</NavLink>
+               {/* <NavLink to={'/dashboard/add-medicine'} className="btn flex justify-center items-center text-base">Add Medicine</NavLink> */}
+               <NavLink to={'/dashboard/manage-medicine'} className="btn flex justify-center items-center text-base">Manage Medicine</NavLink>
                <NavLink to={'/dashboard/advertisement'} className="btn flex justify-center items-center text-base">Advertisement</NavLink>
 
                 {/* user routes for everyone ====================================== */}
