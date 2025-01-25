@@ -28,7 +28,7 @@ const CategoryItems = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  refetch();
+  //refetch();
 
   //console.log(allProducts)
  

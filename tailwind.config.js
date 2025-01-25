@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'download-bg': "url('/public/bg-download.webp')",
+        'download-bg': "url('/bg-download.webp')",
       },
       colors: {
         'clr-1': '#fef5ee',

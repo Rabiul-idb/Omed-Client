@@ -24,7 +24,7 @@ const DiscountCard = () => {
     
 });
 
-console.log(discountProducts)
+//console.log(discountProducts)
 
 if(isLoading){
     return <Loading></Loading>
