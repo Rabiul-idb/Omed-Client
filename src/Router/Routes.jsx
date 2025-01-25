@@ -22,6 +22,7 @@ import ManageAdvertise from "../Dashboard/Admin/ManageAdvertise";
 import ManageUser from "../Dashboard/Admin/ManageUser";
 import ManageMedicine from "../Dashboard/Seller/ManageMedicine";
 import About from "../Pages/About";
+import PrivateSeller from "../PrivateRoute/PrivateSeller";
 
 
 export  const router = createBrowserRouter([
@@ -87,9 +88,9 @@ export  const router = createBrowserRouter([
             },
             {
               path: 'manage-medicine',
-              element: <PrivateRoute>
+              element: <PrivateSeller>
                 <ManageMedicine></ManageMedicine>
-              </PrivateRoute>
+              </PrivateSeller>
             },
             {
               path: 'add-category',
@@ -109,6 +110,7 @@ export  const router = createBrowserRouter([
                 <ManageCategory></ManageCategory>
               </PrivateRoute>
             },
+            //seller private route
             {
               path: 'manage-advertisement',
               element: <PrivateRoute>
@@ -117,9 +119,9 @@ export  const router = createBrowserRouter([
             },
             {
               path: 'advertisement',
-              element: <PrivateRoute>
+              element: <PrivateSeller>
                 <Advertisement></Advertisement>
-              </PrivateRoute>
+              </PrivateSeller>
             },
             {
               path: 'cart',

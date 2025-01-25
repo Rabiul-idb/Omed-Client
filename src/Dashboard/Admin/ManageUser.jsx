@@ -133,7 +133,9 @@ const ManageUser = () => {
                     </td>
                     <td>{user.joining_date}</td>
                     <td>
-                        <select onChange={(e) => handleSelect(user._id, e.target.value)}
+                       {
+                        user.role === 'admin' ? user.role : <>
+                           <select onChange={(e) => handleSelect(user._id, e.target.value)}
                     value={selectedRoles[user._id] || ""} className="select select-bordered w-full max-w-xs">
                             <option value="" disabled >Update Role</option>
                             <option value="customer" >Customer</option>
@@ -141,9 +143,15 @@ const ManageUser = () => {
                             <option value="admin" >Admin</option>
 
                         </select>
+                        </>
+                       }
                     </td>
                     <th>
-                    <button onClick={() => handleUpdateRole(user._id)} className="btn btn-xs">Apply</button>
+                    {
+                      user.role === 'admin' ? 'Not Allowed' : <>
+                        <button onClick={() => handleUpdateRole(user._id)} className="btn btn-xs">Apply</button>
+                      </>
+                    }
                     </th>
                 </tr>
             )
