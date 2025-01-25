@@ -21,6 +21,7 @@ import Advertisement from "../Dashboard/Advertisement";
 import ManageAdvertise from "../Dashboard/Admin/ManageAdvertise";
 import ManageUser from "../Dashboard/Admin/ManageUser";
 import ManageMedicine from "../Dashboard/Seller/ManageMedicine";
+import About from "../Pages/About";
 
 
 export  const router = createBrowserRouter([
@@ -37,6 +38,10 @@ export  const router = createBrowserRouter([
             {
                 path: '/shop',
                 element: <Shop></Shop>,
+            },
+            {
+                path: '/about',
+                element: <About></About>,
             },
             {
                 path: '/medicines/:category',

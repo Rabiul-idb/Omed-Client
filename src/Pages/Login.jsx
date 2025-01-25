@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import { GoogleAuthProvider } from "firebase/auth";
 import { contextApi } from "../AuthContex/AuthContext";
 import { Player } from "@lottiefiles/react-lottie-player";
-
 import animationData from '../assets/lottie/lottie-login.json'
 import useAuth from "../Hooks/useAuth";
 import axios from "axios";

@@ -58,8 +58,8 @@ const Navbar = () => {
                     user?.email && (<li><NavLink to={"/dashboard"} className="text-base font-semibold">Dashboard</NavLink></li>) 
                 } */}
             <li>
-              <NavLink to={"/gallary"} className="text-base font-semibold">
-                Gallary
+              <NavLink to={"/about"} className="text-base font-semibold">
+                About Us
               </NavLink>
             </li>
           </ul>
