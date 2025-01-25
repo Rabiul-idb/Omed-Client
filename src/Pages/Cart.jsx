@@ -27,15 +27,51 @@ const Cart = () => {
     const total = myCarts.reduce((acc, item, index) => acc + item.price * quantities[index], 0);
     const grandTotal = parseInt(total) -5;
      
- 
+    const handleClearCart = () =>{
+     //console.log(myCarts.length)
+
+      if(myCarts.length === 0){
+        Swal.fire({
+          title: "Error",
+          text: "Your cart is empty",
+          icon: "error",
+        });
+        return;
+      }
+
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Clear All!",
+        }).then (result => {
+            if(result.isConfirmed){
+                try {
+                  axiosSecure.delete(`/clearMyCart/${user?.email}`)
+                  .then((res) => {
+                      // console.log(data);
+                      if (res.data.deletedCount > 0) {
+                        refetch();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your all Items has been deleted.",
+                            icon: "success",
+                        });
+                      }
+                  })
+                } catch (error) {
+                  console.log(error)
+                }
+            }
+        })
+
+    }
   
 
   const handleDeleteCart = async(id) =>{
-    // await axiosSecure.delete(`/myCarts/${id}`)
-    // .then((response) => {
-    //     console.log(response.data);
-    // })
-
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -92,7 +128,7 @@ const Cart = () => {
 
           }).then(result =>{
             if(result.isConfirmed){
-              navigate('/');
+              navigate('/shop');
             }
           });
          }
@@ -101,68 +137,81 @@ const Cart = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-center mb-3">My Cart Items ({myCarts.length})</h2>
-      <div className="flex gap-5">
-        <div className="overflow-x-auto border rounded-md">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th> #</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Avai. Qty</th>
-                <th>Order Quantity</th>
-                <th>Total</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {myCarts.map((cart, index) => (
-                <tr>
-                  <th>{index +1}</th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img
-                            src={cart.photo}
-                            alt="Avatar Tailwind CSS Component"
-                          />
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="text-2xl font-bold text-center mb-3">My Cart Items ({myCarts.length})</h2>
+        <button onClick={handleClearCart} className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">Clear All Items</button>
+      </div>
+      <div className="flex gap-5 justify-between">
+        {
+          myCarts && myCarts.length > 0 ? <>
+            <div className="overflow-x-auto border rounded-md">
+              <table className="table">
+                {/* head */}
+                <thead>
+                  <tr>
+                    <th> #</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Avai. Qty</th>
+                    <th>Order Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {myCarts.map((cart, index) => (
+                    <tr>
+                      <th>{index +1}</th>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle h-12 w-12">
+                              <img
+                                src={cart.photo}
+                                alt="Avatar Tailwind CSS Component"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="font-bold">{cart.brand_name}</div>
+                            <div className="text-sm opacity-50">{cart.brand}</div>
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">{cart.brand_name}</div>
-                        <div className="text-sm opacity-50">{cart.brand}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{cart.price}</td>
-                  <td>{cart.quantity}</td>
-                  <td className="w-24">
-                    <input
-                            type="number"
-                            max={cart.quantity}
-                            value={quantities[index]} // Bind to specific row's quantity
-                            onChange={(e) => handleValueChange(index, e.target.value)} // Update only this row
-                            className="input input-bordered input-sm w-full text-center"
-                        />
-                  </td>
-                  <th>
-                    <p className="text-base font-bold" > {cart.price * quantities[index]} $</p>
-                  </th>
-                  <td>
-                    <button onClick={()=> handleDeleteCart(cart._id)} className="btn btn-ghost btn-xs">
-                    <MdDeleteForever className="text-2xl text-red-600" />
-                    </button>
-                    
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="flex-1 p-5 border rounded-md">
+                      </td>
+                      <td>{cart.price}</td>
+                      <td>{cart.quantity}</td>
+                      <td className="w-24">
+                        <input
+                                type="number"
+                                max={cart.quantity}
+                                value={quantities[index]} // Bind to specific row's quantity
+                                onChange={(e) => handleValueChange(index, e.target.value)} // Update only this row
+                                className="input input-bordered input-sm w-full text-center"
+                            />
+                      </td>
+                      <th>
+                        <p className="text-base font-bold" > {cart.price * quantities[index]} $</p>
+                      </th>
+                      <td>
+                        <button onClick={()=> handleDeleteCart(cart._id)} className="btn btn-ghost btn-xs">
+                        <MdDeleteForever className="text-2xl text-red-600" />
+                        </button>
+                        
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            </> : 
+            <div>
+              <h3 className="text-xl text-red-600 font-semibold">
+                You have no Items in your Cart.
+              </h3>
+              <button onClick={() => navigate('/shop')} className="btn mt-5 bg-green-600 text-white hover:bg-green-700 hover:text-white" >Shop Now</button>
+            </div>
+        }
+        <div className="flex-1 p-5 border rounded-md max-w-lg">
               <h3 className="font-semibold text-xl">Billing Summary</h3>
               <hr className="my-3"></hr>
               <div className="flex justify-between items-center mb-2">

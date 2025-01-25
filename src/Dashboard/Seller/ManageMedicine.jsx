@@ -64,7 +64,7 @@ const ManageMedicine = () => {
         </>
       ) : (
         <>
-          <h3 className="text-2xl text-red-600 font-semibold">
+          <h3 className="text-xl text-red-600 font-semibold">
             No Medicine Added to your Account
           </h3>
         </>

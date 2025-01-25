@@ -48,10 +48,10 @@ const ManageAdvertise = () => {
     return (
         <div>
             <div>
-      <div className="flex gap-10 items-center mb-4 ">
-        <h2 className="text-xl font-semibold">Active Ads ({activeAds.length}),</h2>
-        <h2 className="text-xl font-semibold">Pending Ads ({pendingAds.length})</h2>
-      </div>
+          <div className="flex gap-10 items-center mb-4 ">
+            <h2 className="text-xl font-semibold">Active Ads ({activeAds.length}),</h2>
+            <h2 className="text-xl font-semibold">Pending Ads ({pendingAds.length})</h2>
+          </div>
 
       <div className="overflow-x-auto">
         <table className="table">
