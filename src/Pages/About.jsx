@@ -1,9 +1,15 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import animationData from '../assets/lottie/lottie-about.json';
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   return (
     <div className="bg-gray-50 min-h-screen p-6">
+
+      <Helmet>
+            <title>OMED - Online Medicine | About us</title>
+      </Helmet>
+
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8">
         <h1 className="text-3xl font-bold text-black mb-4">About OMED</h1>
         <p className="text-gray-700 leading-relaxed mb-6">

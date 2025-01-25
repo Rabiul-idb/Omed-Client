@@ -8,6 +8,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { MdDeleteForever } from "react-icons/md";
 import useAuth from "../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Cart = () => {
   const [myCarts, refetch] = useCart();
@@ -137,6 +138,11 @@ const Cart = () => {
 
   return (
     <div>
+
+      <Helmet>
+            <title>OMED - Online Medicine | cart</title>
+      </Helmet>
+
       <div className="flex justify-between items-center mb-5">
         <h2 className="text-2xl font-bold text-center mb-3">My Cart Items ({myCarts.length})</h2>
         <button onClick={handleClearCart} className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">Clear All Items</button>

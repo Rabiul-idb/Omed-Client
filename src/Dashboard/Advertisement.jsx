@@ -3,6 +3,7 @@ import AddAdvertise from "../Modals/AddAdvertise";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAuth from "../Hooks/useAuth";
 import Loading from "../Components/Loading";
+import { Helmet } from "react-helmet-async";
 
 const Advertisement = () => {
 
@@ -22,6 +23,11 @@ const Advertisement = () => {
 
   return (
     <div>
+
+          <Helmet>
+                  <title>OMED - Online Medicine | Request Advertise</title>
+            </Helmet>
+
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">My Advertisements</h2>
         <button

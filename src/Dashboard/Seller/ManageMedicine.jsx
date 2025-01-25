@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Components/Loading";
 import AddMedicine from "../AddMedicine";
+import { Helmet } from "react-helmet-async";
 
 const ManageMedicine = () => {
   const axiosSecure = useAxiosSecure();
@@ -24,6 +25,11 @@ const ManageMedicine = () => {
 
   return (
     <div>
+
+      <Helmet>
+            <title>OMED - Online Medicine | Manage Medicine</title>
+      </Helmet>
+
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">All Added Medicines</h2>
         <button

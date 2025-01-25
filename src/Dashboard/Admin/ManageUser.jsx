@@ -3,6 +3,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import Loading from "../../Components/Loading";
+import { Helmet } from "react-helmet-async";
 
 const ManageUser = () => {
 
@@ -79,6 +80,10 @@ const ManageUser = () => {
 
   return (
     <>
+          <Helmet>
+                <title>OMED - Online Medicine | Manage Users</title>
+          </Helmet>
+
       <div className="flex gap-10 items-center mb-4">
         <h2 className="text-xl font-semibold">Admins: ({admins.length})</h2>
         <h2 className="text-xl font-semibold">Sellers: ({sellers.length})</h2>

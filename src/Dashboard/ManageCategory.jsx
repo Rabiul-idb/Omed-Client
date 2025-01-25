@@ -7,6 +7,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import AddCategory from '../Modals/AddCategory';
 import Swal from 'sweetalert2';
 import UpdateCategory from '../Modals/UpdateCategory';
+import { Helmet } from 'react-helmet-async';
 
 const ManageCategory = () => {
 
@@ -53,6 +54,11 @@ const ManageCategory = () => {
 
     return (
         <div>
+
+                    <Helmet>
+                        <title>OMED - Online Medicine | Manage Category</title>
+                  </Helmet>
+
            <div className='flex justify-between items-center mb-4'>
                 <h2 className='text-2xl font-bold'>Active Categories ({categories.length})</h2>
                 <button  onClick={() => document.getElementById("my_modal_2").showModal()} className='btn'>+ Add</button>

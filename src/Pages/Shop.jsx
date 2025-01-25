@@ -5,6 +5,7 @@ import ProductRow from "../Components/ProductRow";
 import ItemDetails from "../Modals/ItemDetails";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Shop = () => {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -42,7 +43,13 @@ const Shop = () => {
 
 
   return (
+
     <div className="w-11/12 mx-auto pb-14">
+
+    <Helmet>
+      <title>OMED - Online Medicine | Shop</title>
+    </Helmet>
+
       <div className=" flex justify-between items-center">
         <h2 className="font-bold text-2xl my-7">All Avilable Medicines ({sortedMedicine.length}) </h2>
         <div className="text-right mb-5">

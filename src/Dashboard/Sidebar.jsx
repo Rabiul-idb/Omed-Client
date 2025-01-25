@@ -26,7 +26,7 @@ const Sidebar = () => {
                 {/* admin routes for everyone ====================================== */}
             {
                 isAdmin && <>
-                    <NavLink to={'/dashboard/statistics'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Statistics</NavLink>
+                    <NavLink to={'/dashboard/statistics'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Admin Home</NavLink>
                     <NavLink to={'/dashboard/manage-users'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Manage Users</NavLink>
                     <NavLink to={'/dashboard/manage-category'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Manage Category</NavLink>
                     <NavLink to={'/dashboard/manage-advertisement'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Manage Advertisement</NavLink>
@@ -39,7 +39,7 @@ const Sidebar = () => {
             {
                 isSeller && <>
                     <NavLink to={'/dashboard/manage-medicine'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Manage Medicine</NavLink>
-                    <NavLink to={'/dashboard/advertisement'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Advertisement</NavLink>
+                    <NavLink to={'/dashboard/advertisement'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Request Advertise</NavLink>
                 </>
 
             }

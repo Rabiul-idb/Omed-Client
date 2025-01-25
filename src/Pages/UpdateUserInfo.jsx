@@ -3,6 +3,7 @@
 import { updateProfile } from "firebase/auth";
 import useAuth from "../Hooks/useAuth";
 import { imgUpload } from "../api/utils";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -40,7 +41,9 @@ const UpdateUserInfo = () => {
     return (
         <div className="hero bg-[#fef5ee] min-h-screen">
 
-       
+       <Helmet>
+                   <title>OMED - Online Medicine | Update Profile</title>
+             </Helmet>
     
   <div className="flex flex-col-reverse py-8 sm:flex-row lg:w-[70%] lg:grid grid-cols-2 gap-7 ">
     <div className="card bg-base-100 shadow-2xl">
