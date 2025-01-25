@@ -23,6 +23,7 @@ import ManageUser from "../Dashboard/Admin/ManageUser";
 import ManageMedicine from "../Dashboard/Seller/ManageMedicine";
 import About from "../Pages/About";
 import PrivateSeller from "../PrivateRoute/PrivateSeller";
+import PrivateAdmin from "../PrivateRoute/PrivateAdmin";
 
 
 export  const router = createBrowserRouter([
@@ -58,7 +59,9 @@ export  const router = createBrowserRouter([
             },
             {
               path: '/updateUserInfo',
-              element: <UpdateUserInfo></UpdateUserInfo>
+              element: <PrivateRoute>
+                <UpdateUserInfo></UpdateUserInfo>
+              </PrivateRoute>
             },
             {
               path: '/productDetails/:id',
@@ -74,18 +77,40 @@ export  const router = createBrowserRouter([
             <DashboardLayout></DashboardLayout>
           </PrivateRoute>,
           children: [
+            //admin private Routes
             {
               path: 'statistics',
-              element:<PrivateRoute>
+              element:<PrivateAdmin>
                 <Statistics></Statistics>
-              </PrivateRoute>
+              </PrivateAdmin>
+            },
+            
+            {
+              path: 'add-category',  //this route is no needed
+              element: <PrivateAdmin>
+                <AddCategory></AddCategory>
+              </PrivateAdmin>
             },
             {
-              path: 'add-medicine',
-              element: <PrivateRoute>
-                <AddMedicine></AddMedicine>
-              </PrivateRoute>
+              path: 'manage-users',
+              element: <PrivateAdmin>
+                <ManageUser></ManageUser> 
+              </PrivateAdmin>
             },
+            {
+              path: 'manage-category',
+              element: <PrivateAdmin>
+                <ManageCategory></ManageCategory>
+              </PrivateAdmin>
+            },
+            {
+              path: 'manage-advertisement',
+              element: <PrivateAdmin>
+                <ManageAdvertise></ManageAdvertise>
+              </PrivateAdmin>
+            },
+
+            //seller private route
             {
               path: 'manage-medicine',
               element: <PrivateSeller>
@@ -93,36 +118,12 @@ export  const router = createBrowserRouter([
               </PrivateSeller>
             },
             {
-              path: 'add-category',
-              element: <PrivateRoute>
-                <AddCategory></AddCategory>
-              </PrivateRoute>
-            },
-            {
-              path: 'manage-users',
-              element: <PrivateRoute>
-                <ManageUser></ManageUser> 
-              </PrivateRoute>
-            },
-            {
-              path: 'manage-category',
-              element: <PrivateRoute>
-                <ManageCategory></ManageCategory>
-              </PrivateRoute>
-            },
-            //seller private route
-            {
-              path: 'manage-advertisement',
-              element: <PrivateRoute>
-                <ManageAdvertise></ManageAdvertise>
-              </PrivateRoute>
-            },
-            {
               path: 'advertisement',
               element: <PrivateSeller>
                 <Advertisement></Advertisement>
               </PrivateSeller>
             },
+            // for every one
             {
               path: 'cart',
               element: <PrivateRoute>
