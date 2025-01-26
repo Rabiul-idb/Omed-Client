@@ -23,7 +23,7 @@ const TopBrands = () => {
         <div className=" pb-14">
       <div className="w-11/12 mx-auto">
         <div className=" mb-2">
-          <h2 className="font-bold text-4xl">Top Brands</h2>
+          <h2 className="font-bold lg:text-4xl md:text-3xl text-2xl">Top Brands</h2>
         </div>
 
         <div className="brands">
@@ -38,6 +38,28 @@ const TopBrands = () => {
             slidesPerView={6}
             spaceBetween={24}
             speed={2000}
+            breakpoints={{
+              320: {
+                slidesPerView: 2,
+                spaceBetween: 16,
+              },
+              480: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+              },
+              768: {
+                slidesPerView: 5,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 6,
+                spaceBetween: 24,
+              },
+              1440: {
+                slidesPerView: 7,
+                spaceBetween: 32,
+              },
+            }}
             // navigation={true}
              modules={[Autoplay]}
             className="mySwiper"

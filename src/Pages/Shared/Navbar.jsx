@@ -6,12 +6,16 @@ import { contextApi } from "../../AuthContex/AuthContext";
 import Swal from "sweetalert2";
 import { TiShoppingCart } from "react-icons/ti";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
+import useSeller from "../../Hooks/useSeller";
 
 const Navbar = () => {
   const { user, setUser, logOut } = useContext(contextApi);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const [myCarts] = useCart();
+  const [isAdmin] = useAdmin();
+  const [isSeller] = useSeller();
 
   const handleLogOut = () => {
     logOut()
@@ -68,7 +72,7 @@ const Navbar = () => {
           {/* <div className="hidden lg:block font-semibold text-black text-lg mr-2">
             {user && user?.email ? user?.displayName : ""}
           </div> */}
-          <Link to={'/dashboard/Cart'} className=" rounded-full border-gray-400 p-2 mr-3 relative">
+          <Link to={'/dashboard/Cart'} className=" rounded-full border-gray-400 p-2 mr-2 relative">
             <TiShoppingCart className="text-2xl"  />
             <span className="absolute -top-1 right-0 text-red-700">{myCarts.length}</span>
           </Link>
@@ -102,8 +106,29 @@ const Navbar = () => {
                   <a>{user?.email}</a>
                 </li>
                 <li className="font-semibold">
-                  <Link to={"/dashboard"}>Dashboard</Link>
+                    {isAdmin ? (
+                      <Link to={"/dashboard/admin-home"}>Dashboard</Link>
+                    ) : isSeller ? (
+                      <Link to={"/dashboard/seller-home"}>Dashboard</Link>
+                    ) : (
+                      user?.email && <Link to={"/dashboard/customer-home"}>Dashboard</Link>
+                    )}
                 </li>
+                {/* {
+                  user?.email && (<li className="font-semibold">
+                    <Link to={"/dashboard"}>Dashboard</Link>
+                  </li>)
+                }
+                {
+                   isAdmin && (<li className="font-semibold">
+                    <Link to={"/dashboard/admin-home"}>Dashboard</Link>
+                  </li>)
+                }
+                {
+                   isSeller && (<li className="font-semibold">
+                    <Link to={"/dashboard/seller-home"}>Dashboard</Link>
+                  </li>)
+                } */}
                 {/* <li className="font-semibold"><Link to={"/addFood"}>Add Food</Link></li>
                         <li className="font-semibold"><Link to={`/myOrder/${user?.email}`}>My Order</Link></li> */}
                 <li>
@@ -139,7 +164,7 @@ const Navbar = () => {
                 aria-label="close sidebar"
                 className="drawer-overlay"
               ></label>
-              <ul className="menu bg-base-200 text-base-content min-h-full w-72 p-4">
+              <ul className="menu bg-base-200 text-base-content min-h-full w-60 p-4">
                 <h2 className="font-bold text-xl flex items-center justify-center gap-2">
                   <img src={logo} className="w-12" alt="" />
                   OMED
@@ -152,8 +177,8 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/allFoods"} className="text-base font-semibold">
-                    All Foods
+                  <NavLink to={"/shop"} className="text-base font-semibold">
+                    Shop
                   </NavLink>
                 </li>
                 {user?.email && (
@@ -167,8 +192,8 @@ const Navbar = () => {
                   </li>
                 )}
                 <li>
-                  <NavLink to={"/gallary"} className="text-base font-semibold">
-                    Gallary
+                  <NavLink to={"/about"} className="text-base font-semibold">
+                    About us
                   </NavLink>
                 </li>
               </ul>

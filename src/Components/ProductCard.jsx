@@ -14,12 +14,12 @@ const ProductCard = ({product}) => {
           alt=""
         />
       </div>
-      <h2 className="font-bold text-xl leading-tight my-2">
+      <h2 className="font-bold md:text-xl sm:text-lg text-base leading-tight my-2">
         {brand_name}
       </h2>
       <hr></hr>
       <div className="flex justify-between items-center mt-4">
-        <p className="text-base font-bold text-black">
+        <p className="md:text-base text-sm font-bold text-black">
           $ <span>{price}</span>
         </p>
         {/* <Link to={`/products/${_id}`} className="btn">

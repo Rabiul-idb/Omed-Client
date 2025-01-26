@@ -50,8 +50,8 @@ const Shop = () => {
       <title>OMED - Online Medicine | Shop</title>
     </Helmet>
 
-      <div className=" flex justify-between items-center">
-        <h2 className="font-bold text-2xl my-7">All Avilable Medicines ({sortedMedicine.length}) </h2>
+      <div className=" flex justify-between items-center my-7">
+        <h2 className="font-bold lg:text-2xl md:text-xl text-lg ">All Avilable Medicines ({sortedMedicine.length}) </h2>
         <div className="text-right mb-5">
           <span className="">Short by Company:</span>
           <select

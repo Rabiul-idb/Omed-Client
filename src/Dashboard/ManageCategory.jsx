@@ -60,7 +60,7 @@ const ManageCategory = () => {
                   </Helmet>
 
            <div className='flex justify-between items-center mb-4'>
-                <h2 className='text-2xl font-bold'>Active Categories ({categories.length})</h2>
+                <h2 className='lg:text-2xl md:text-lg text-base font-bold'>Active Categories ({categories.length})</h2>
                 <button  onClick={() => document.getElementById("my_modal_2").showModal()} className='btn'>+ Add</button>
            </div>
 
@@ -97,7 +97,7 @@ const ManageCategory = () => {
                         {category.cat_description}
                         </td>
                         <td>{category.category}</td>
-                        <th className='space-x-4'>
+                        <th className=''>
                         <button onClick={() => setSelectedItem(category)} className="btn btn-ghost btn-xs">
                             <FaEdit className="text-xl text-info" /></button>
                         <button onClick={()=> handleDeleteCategory(category._id)} className="btn btn-ghost btn-xs">

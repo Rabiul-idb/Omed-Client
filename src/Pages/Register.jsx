@@ -7,6 +7,7 @@ import { contextApi } from "../AuthContex/AuthContext";
 import axios from "axios";
 import { imgUpload } from "../api/utils";
 import { FaSpinner } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 
 const Register = () => {
@@ -17,67 +18,7 @@ const Register = () => {
     const [passError, setPassError] = useState('');
     const navigate = useNavigate();
 
-    // const handleSubmit = async(e)=>{
-    //     e.preventDefault();
-
-    //     const name = e.target.username.value;
-    //     if(name.length < 5){
-    //         setError('Name must be at least 5 characters');
-    //         return;
-    //     }
-    //     const email = e.target.email.value;
-
-    //     const password = e.target.password.value;
-    //     if(password.length < 6){
-    //         setPassError('Password must be at least 6 characters');
-    //         return;
-    //     }
-    //     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
-    //     if(!regex.test(password)){
-    //         setPassError('Password must contain at least one uppercase letter, one lowercase letter, one digit , one special charecter')
-    //         return;
-    //     }   
-        
-    //     const photo = e.target.photo.files[0];
-       
-
-    //      // send img to imgbb
-    //    const img_url =  await imgUpload(photo);
-    //     console.log(img_url)
-
-    //   // console.log(name, email, password)
-      
-
-    //     createNewUser(email, password)
-    //     .then(result => {
-    //         const user = result.user;
-    //         try {
-    //              updateProfile(user, {
-    //               displayName: name,
-    //               photoURL: img_url,
-    //             });
-    //             console.log("Profile updated successfully!");
-    //           } catch (error) {
-    //             console.error("Error updating profile:", error.message);
-    //           }
-    //         setUser(user);
-    //         Swal.fire({
-    //             title: 'Success!',
-    //             text: 'Congrates! Successfully Registered',
-    //             icon: 'success',
-    //             confirmButtonText: 'OK'
-    //           })
-    //         navigate('/');
-    //        // console.log(user)
-    //     })
-    //     .then(error =>{
-    //         // const errorCode = error.code;
-    //         // const errorMessage = error.message;
-    //          console.log(error);
-    //     })
-
-
-    // }
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -164,7 +105,11 @@ const Register = () => {
       
 
     return (
-       
+
+      <div>
+        <Helmet>
+          <title>OMED - Online Medicine | Register</title>
+        </Helmet>
         <div className="border border-gray-500 rounded-2xl p-7 lg:w-5/12 md:w-8/12 w-10/12 mx-auto mt-12 mb-10 bg-cyan-50">
             <h2 className="font-bold md:text-2xl text-xl lg:text-3xl text-center">User Registration</h2>
             <hr className="my-3"/>
@@ -215,6 +160,9 @@ const Register = () => {
             
             
         </div>
+
+      </div>
+       
     );
 };
 

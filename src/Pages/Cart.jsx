@@ -144,7 +144,7 @@ const Cart = () => {
       </Helmet>
 
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-2xl font-bold text-center mb-3">My Cart Items ({myCarts.length})</h2>
+        <h2 className="md:text-2xl text-xl font-bold text-center mb-3">My Cart Items ({myCarts.length})</h2>
         <button onClick={handleClearCart} className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">Clear All Items</button>
       </div>
       <div className="flex gap-5 justify-between">
@@ -185,7 +185,7 @@ const Cart = () => {
                         </div>
                       </td>
                       <td>{cart.price}</td>
-                      <td>{cart.quantity}</td>
+                      <td className="">{cart.quantity}</td>
                       <td className="w-24">
                         <input
                                 type="number"
@@ -195,8 +195,8 @@ const Cart = () => {
                                 className="input input-bordered input-sm w-full text-center"
                             />
                       </td>
-                      <th>
-                        <p className="text-base font-bold" > {cart.price * quantities[index]} $</p>
+                      <th className="">
+                        <p className="text-sm font-bold" > {cart.price * quantities[index]} $</p>
                       </th>
                       <td>
                         <button onClick={()=> handleDeleteCart(cart._id)} className="btn btn-ghost btn-xs">
@@ -211,14 +211,14 @@ const Cart = () => {
             </div>
             </> : 
             <div>
-              <h3 className="text-xl text-red-600 font-semibold">
+              <h3 className="md:text-xl text-lg text-red-600 font-semibold">
                 You have no Items in your Cart.
               </h3>
               <button onClick={() => navigate('/shop')} className="btn mt-5 bg-green-600 text-white hover:bg-green-700 hover:text-white" >Shop Now</button>
             </div>
         }
-        <div className="flex-1 p-5 border rounded-md max-w-lg">
-              <h3 className="font-semibold text-xl">Billing Summary</h3>
+        <div className="p-5 border rounded-md w-[250px]">
+              <h3 className="font-semibold md:text-lg text-base">Billing Summary</h3>
               <hr className="my-3"></hr>
               <div className="flex justify-between items-center mb-2">
                 <p className="text-base font-medium">Subtotal</p>

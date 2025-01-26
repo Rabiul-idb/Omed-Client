@@ -8,6 +8,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import animationData from '../assets/lottie/lottie-login.json'
 import useAuth from "../Hooks/useAuth";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { userLogin, setUser, loginWithGoogle } = useAuth();
@@ -85,7 +86,12 @@ console.log(location.state);
   };
 
   return (
-    <div className="border border-gray-500 rounded-2xl p-7 w-11/12 mx-auto mt-12 mb-10 bg-cyan-50 grid md:grid-cols-2 grid-cols-1 gap-7">
+   <div>
+      <Helmet>
+        <title>OMED - Online Medicine | Login</title>
+      </Helmet>
+
+      <div className="border border-gray-500 rounded-2xl p-7 w-11/12 mx-auto mt-12 mb-10 bg-cyan-50 grid md:grid-cols-2 grid-cols-1 gap-7">
       <div>
         <h2 className="font-bold lg:text-3xl md:text-2xl text-xl mb-5 text-center">
           User Login
@@ -164,6 +170,7 @@ console.log(location.state);
       src={animationData}
     />
     </div>
+   </div>
   );
 };
 

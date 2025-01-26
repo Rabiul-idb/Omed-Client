@@ -11,7 +11,7 @@ const About = () => {
       </Helmet>
 
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8">
-        <h1 className="text-3xl font-bold text-black mb-4">About OMED</h1>
+        <h1 className="lg:text-4xl md:text-3xl text-2xl font-bold text-black mb-4">About OMED</h1>
         <p className="text-gray-700 leading-relaxed mb-6">
           Welcome to{" "}
           <span className="font-semibold text-red-600">
@@ -28,7 +28,7 @@ const About = () => {
             src={animationData}
         />
           <div className="">
-            <h2 className="text-2xl font-semibold text-black mb-3">
+            <h2 className="md:text-2xl texl-xl font-semibold text-black mb-3">
               What We Offer
             </h2>
             <ul className="list-disc list-inside text-gray-700 mb-6 grid gap-5">
@@ -63,7 +63,7 @@ const About = () => {
             </ul>
           </div>
         </div>
-        <h2 className="text-2xl font-semibold text-black mb-3">
+        <h2 className="md:text-2xl text-xl font-semibold text-black mb-3">
           Our Mission
         </h2>
         <p className="text-gray-700 leading-relaxed mb-6">
@@ -71,7 +71,7 @@ const About = () => {
           accessible for all. We believe in building a healthier world, one
           order at a time.
         </p>
-        <h2 className="text-2xl font-semibold text-black mb-3">
+        <h2 className="md:text-2xl text-xl font-semibold text-black mb-3">
           Why Choose Us?
         </h2>
         <p className="text-gray-700 leading-relaxed">

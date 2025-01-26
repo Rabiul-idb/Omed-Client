@@ -3,13 +3,20 @@ import logo from "../../assets/images/logo.png";
 const Footer = () => {
   return (
     <div className="bg-clr-1 ">
-      <footer className="footer w-11/12 mx-auto text-base-content py-10">
+      <footer className="footer lg:grid-cols-4 md:grid-cols-4 grid-cols-2 w-11/12 mx-auto text-base-content py-10">
         <nav>
           <h6 className="footer-title">Services</h6>
           <a className="link link-hover">Branding</a>
           <a className="link link-hover">Design</a>
           <a className="link link-hover">Marketing</a>
           <a className="link link-hover">Advertisement</a>
+        </nav>
+        <nav>
+          <h6 className="footer-title">OFFER</h6>
+          <a className="link link-hover">Discount</a>
+          <a className="link link-hover">Cashback</a>
+          <a className="link link-hover">Career</a>
+          <a className="link link-hover">Free Delevery</a>
         </nav>
         <nav>
           <h6 className="footer-title">Company</h6>

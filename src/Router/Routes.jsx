@@ -24,6 +24,8 @@ import ManageMedicine from "../Dashboard/Seller/ManageMedicine";
 import About from "../Pages/About";
 import PrivateSeller from "../PrivateRoute/PrivateSeller";
 import PrivateAdmin from "../PrivateRoute/PrivateAdmin";
+import SellerHome from "../Dashboard/Seller/SellerHome";
+import CustomerHome from "../Dashboard/CustomerHome";
 
 
 export  const router = createBrowserRouter([
@@ -79,7 +81,7 @@ export  const router = createBrowserRouter([
           children: [
             //admin private Routes
             {
-              path: 'statistics',
+              path: 'admin-home',
               element:<PrivateAdmin>
                 <Statistics></Statistics>
               </PrivateAdmin>
@@ -112,6 +114,12 @@ export  const router = createBrowserRouter([
 
             //seller private route
             {
+              path: 'seller-home',
+              element: <PrivateSeller>
+                <SellerHome></SellerHome>
+              </PrivateSeller>
+            },
+            {
               path: 'manage-medicine',
               element: <PrivateSeller>
                 <ManageMedicine></ManageMedicine>
@@ -124,6 +132,12 @@ export  const router = createBrowserRouter([
               </PrivateSeller>
             },
             // for every one
+            {
+              path: 'customer-home',
+              element: <PrivateRoute>
+                <CustomerHome></CustomerHome>
+              </PrivateRoute>
+            },
             {
               path: 'cart',
               element: <PrivateRoute>

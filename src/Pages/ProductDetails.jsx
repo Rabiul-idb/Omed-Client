@@ -14,7 +14,6 @@ const ProductDetails = () => {
         const {id} = useParams();
         const {user  } = useAuth();
         const axiosSecure = useAxiosSecure();
-        const location = useLocation();
         const navigate = useNavigate();
         const [, refetch] = useCart();
 
@@ -88,7 +87,7 @@ const handleAddToCart = () =>{
                     }
                 </div>
                 <div className="py-5">
-                    <h2 className="text-3xl font-bold">{brand_name}</h2>
+                    <h2 className="lg:text-3xl md:text-2xl text-xl font-bold">{brand_name}</h2>
                     <p className="text-slate-600 font-semibold mb-3">Category: {category}</p>
                     <p className="text-slate-600">Generic Name: {generic_name}</p>
                     <p className="text-slate-600">Company: {brand}</p>
@@ -101,7 +100,7 @@ const handleAddToCart = () =>{
                     </div>
                     <p className="text-slate-600">Quantity: {quantity} Unit lefts</p>
                     <div className="flex justify-between items-center">
-                        <h3 className="text-2xl font-semibold">Price: {price}$</h3>
+                        <h3 className="md:text-2xl text-xl font-semibold">Price: {price}$</h3>
                         
                         <button onClick={handleAddToCart} disabled={quantity <= 0 ? true : false} className="btn bg-red-600 text-white hover:bg-red-700 hover:text-white">
                             {

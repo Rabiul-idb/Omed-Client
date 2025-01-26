@@ -79,15 +79,15 @@ const ManageUser = () => {
 
 
   return (
-    <>
+    <div>
           <Helmet>
                 <title>OMED - Online Medicine | Manage Users</title>
           </Helmet>
 
       <div className="flex gap-10 items-center mb-4">
-        <h2 className="text-xl font-semibold">Admins: ({admins.length})</h2>
-        <h2 className="text-xl font-semibold">Sellers: ({sellers.length})</h2>
-        <h2 className="text-xl font-semibold">Customers: ({customers.length})</h2>
+        <h2 className="lg:text-xl text-base font-semibold">Admins: ({admins.length})</h2>
+        <h2 className="lg:text-xl text-base font-semibold">Sellers: ({sellers.length})</h2>
+        <h2 className="lg:text-xl text-base font-semibold">Customers: ({customers.length})</h2>
       </div>
 
       <div className="overflow-x-auto">
@@ -166,7 +166,7 @@ const ManageUser = () => {
         </table>
       </div>
       <ToastContainer />
-    </>
+    </div>
   );
 };
 

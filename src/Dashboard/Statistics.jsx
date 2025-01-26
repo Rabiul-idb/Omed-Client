@@ -7,7 +7,7 @@ const Statistics = () => {
             <Helmet>
                 <title>OMED - Online Medicine | Admin Home</title>
             </Helmet>
-            Statistics page from dashboard
+            this is admin home page
         </div>
     );
 };

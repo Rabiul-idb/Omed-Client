@@ -34,7 +34,7 @@ if(isLoading){
     <div className="bg-clr-1 py-14">
       <div className="w-11/12 mx-auto">
         <div className="text-center mb-10">
-          <h2 className="font-bold text-4xl">Flash Sale</h2>
+          <h2 className="font-bold lg:text-4xl md:text-3xl text-2xl">Flash Sale</h2>
           <p className="text-base mt-2 text-slate-700">
             Get 20% off on your first purchase
           </p>
@@ -49,6 +49,24 @@ if(isLoading){
             loop={true}
             slidesPerView={4}
             spaceBetween={24}
+            breakpoints={{
+              320: {
+                slidesPerView: 2,
+                spaceBetween: 16,
+              },
+              640: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 24,
+              },
+              1440: {
+                slidesPerView: 5,
+                spaceBetween: 32,
+              },
+            }}
             // navigation={true}
             // modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
@@ -58,7 +76,7 @@ if(isLoading){
                 <SwiperSlide>
               <div className="discount-card p-4 relative bg-white rounded-md hover:shadow-xl duration-300">
                 <ProductCard product={product}></ProductCard>
-                <p className="absolute bg-red-600 text-white  p-2 rounded-md top-2 right-2">
+                <p className="absolute bg-red-600 text-white  md:p-2 p-1 md:text-base text-sm rounded-md top-2 right-2">
                   <span>{product.discount}</span>% Off
                 </p>
               </div>

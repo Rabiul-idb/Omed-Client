@@ -84,7 +84,7 @@ const ProductRow = ({item, index, setSelectedItem}) => {
         <td>{item.quantity}</td>
         <td>{item.price}</td>
         <th>{item.discount} %</th>
-        <th className="space-x-5">
+        <th className="flex mt-6 gap-3 items-center justify-center">
           <button onClick={addToCart} className="btn btn-xs">Select</button>
           <button onClick={() => setSelectedItem(item)} className="btn btn-xs">
             <FaEye className="text-base" />

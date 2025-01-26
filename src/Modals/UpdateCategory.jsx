@@ -57,7 +57,7 @@ const UpdateCategory = ({ selectedItem, setSelectedItem, refetch }) => {
     <>
       <div className="modal modal-open">
         <div className="modal-box max-w-xl ">
-        <h2 className="text-2xl font-bold text-center mb-4">Update Category</h2>
+        <h2 className="lg:text-2xl text-xl font-bold text-center mb-4">Update Category</h2>
         <div>
             <p>Current Image:</p>
             <img src={selectedItem.photo} alt="category image" className="w-32 h-20 mx-auto mb-4" />
