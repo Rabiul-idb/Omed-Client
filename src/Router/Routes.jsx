@@ -12,7 +12,7 @@ import Statistics from "../Dashboard/Statistics";
 import AddMedicine from "../Dashboard/AddMedicine";
 import ProductDetails from "../Pages/ProductDetails";
 import Cart from "../Pages/Cart";
-import CheckOut from "../Pages/CheckOut";
+import CheckOut from "../Dashboard/Payment/CheckOut";
 import Shop from "../Pages/Shop";
 import AddCategory from "../Pages/AddCategory";
 import CategoryItems from "../Pages/CategoryItems";

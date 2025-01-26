@@ -103,22 +103,22 @@ const Cart = () => {
 
     const handlePurchase = async()=>{
 
-        const orderInfo ={
-            "product-item": myCarts.length,
-            "shipping-fee": parseInt(10),
-            'discount': 15,
-            "total-bill": grandTotal,
-            "order-status": "pending",
-            "order-date": new Date().toLocaleString(),
-            "customer-name": user?.displayName,
-            "customer-email": user?.email,
+        // const orderInfo ={
+        //     "product-item": myCarts.length,
+        //     "shipping-fee": parseInt(10),
+        //     'discount': 15,
+        //     "total-bill": grandTotal,
+        //     "order-status": "pending",
+        //     "order-date": new Date().toLocaleString(),
+        //     "customer-name": user?.displayName,
+        //     "customer-email": user?.email,
             
-        }
+        // }
 
-         console.log(orderInfo);
+        //  console.log(orderInfo);
          
          if(myCarts.length > 0){
-            await axiosSecure.post('/orders', orderInfo)
+            // await axiosSecure.post('/orders', orderInfo)
             navigate('/dashboard/checkOut');
          }else{
           Swal.fire({
