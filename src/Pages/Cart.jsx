@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet-async";
 const Cart = () => {
   const [myCarts, refetch] = useCart();
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth();
+  const {user, setTotalPrice, totalPrice} = useAuth();
   const [quantities, setQuantities] = useState(myCarts.map(() => 1)); 
   const navigate = useNavigate();
 
@@ -27,6 +27,8 @@ const Cart = () => {
     
     const total = myCarts.reduce((acc, item, index) => acc + item.price * quantities[index], 0);
     const grandTotal = parseInt(total) -5;
+    setTotalPrice(grandTotal);
+    console.log(totalPrice);
      
     const handleClearCart = () =>{
      //console.log(myCarts.length)

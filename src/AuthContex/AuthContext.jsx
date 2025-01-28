@@ -13,6 +13,7 @@ const AuthContext = ({children}) => {
     const [loading, setLoading] = useState(false);
     const [allItems , setAllItems] = useState([]);
     const [activeAds, setActiveAds] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
  
     
@@ -74,7 +75,9 @@ const AuthContext = ({children}) => {
         setAllItems,
         allItems,
         activeAds,
-        setActiveAds
+        setActiveAds,
+        totalPrice,
+        setTotalPrice,
     }
 
 
