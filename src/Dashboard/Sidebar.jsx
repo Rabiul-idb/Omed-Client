@@ -52,7 +52,7 @@ const Sidebar = () => {
             
                 <NavLink to={'/dashboard/customer-home'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Customer Home</NavLink>
                 <NavLink to={'/dashboard/Cart'} className="btn btn-sm mb-2 flex justify-center items-center text-base">My Carts ({myCarts.length})</NavLink>
-                <NavLink to={'/dashboard/checkOut'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Payment Status</NavLink>
+                <NavLink to={'/dashboard/checkOut'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Payment History</NavLink>
                 <NavLink to={'/'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Home</NavLink>
                 <NavLink to={'/shop'} className="btn btn-sm mb-2 flex justify-center items-center text-base">Shop</NavLink>
                 <NavLink to={'/about'} className="btn btn-sm mb-2 flex justify-center items-center text-base">About Us</NavLink>

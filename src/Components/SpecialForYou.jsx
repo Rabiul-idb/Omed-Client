@@ -6,10 +6,28 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { FaCartPlus, FaEye } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 
 const SpecialForYou = () => {
+
+  const uploadPrescription = ()=>{
+    Swal.fire({
+      title: "Not Available !",
+      icon: "warning",
+      text: "This Service is now under Construction. Stay tuned ",
+      confirmButtonText: "Ok",
+    });
+  }
+
+  const registerPharmachy = ()=>{
+    Swal.fire({
+      title: "Not Available !",
+      icon: "warning",
+      text: "This Service is now under Construction. Stay tuned ",
+      confirmButtonText: "Ok",
+    });
+  }
     return (
         <div className=" py-14">
             <div className="w-11/12 mx-auto">
@@ -37,9 +55,9 @@ const SpecialForYou = () => {
                   <h4 className="uppercase font-medium text-xs md:text-base">Upto</h4>
                   <h3 className="uppercase font-bold md:text-xl text-base my-1">14% Off</h3>
                   <p className="font-medium md:text-xl text-base">+ Cashback</p>
-                  <Link className="btn bg-white md:text-base text-xs grid place-items-center mt-7">
+                  <button onClick={uploadPrescription} className="btn bg-white md:text-base text-xs grid place-items-center mt-7">
                    Upload Prescription
-                  </Link>
+                  </button>
                   <div className="absolute bg-white p-2 rounded-full top-0 right-0">
                     <img src="https://cdn.breathewellbeing.in/images/home/symptoms/Banner-Image.webp" className="rounded-full w-14 h-14 " alt="" />
                   </div>
@@ -49,9 +67,9 @@ const SpecialForYou = () => {
                   <h4 className="uppercase font-medium text-xs md:text-base">Upto</h4>
                   <h3 className="uppercase font-bold md:text-xl text-base my-1">15% Off</h3>
                   <p className="font-medium md:text-xl text-base">+ Cashback</p>
-                  <Link className="btn bg-white md:text-base text-xs grid place-items-center mt-7">
+                  <button onClick={registerPharmachy} className="btn bg-white md:text-base text-xs grid place-items-center mt-7">
                     Registered Pharmacy
-                  </Link>
+                  </button>
                   <div className="absolute bg-white p-2 rounded-full top-0 right-0">
                     <img src="https://cdn.breathewellbeing.in/images/home/symptoms/Banner-Image.webp" className="rounded-full w-14 h-14 " alt="" />
                   </div>
