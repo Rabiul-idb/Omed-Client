@@ -26,6 +26,7 @@ import PrivateSeller from "../PrivateRoute/PrivateSeller";
 import PrivateAdmin from "../PrivateRoute/PrivateAdmin";
 import SellerHome from "../Dashboard/Seller/SellerHome";
 import CustomerHome from "../Dashboard/CustomerHome";
+import Contact from "../Pages/Contact";
 
 
 export  const router = createBrowserRouter([
@@ -46,6 +47,10 @@ export  const router = createBrowserRouter([
             {
                 path: '/about',
                 element: <About></About>,
+            },
+            {
+                path: '/contact',
+                element: <Contact></Contact>,
             },
             {
                 path: '/medicines/:category',
