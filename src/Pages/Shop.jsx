@@ -6,6 +6,7 @@ import ItemDetails from "../Modals/ItemDetails";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
+import ProductCard from "../Components/ProductCard";
 
 const Shop = () => {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -73,10 +74,10 @@ const Shop = () => {
       </div>
       {sortedMedicine && sortedMedicine.length > 0 ? (
         <>
-          <div className="overflow-x-auto">
-            <table className="table">
+          <div className="grid gap-5 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+            {/* <table className="table">
               {/* head */}
-              <thead>
+              {/* <thead>
                 <tr>
                   <th> #</th>
                   <th>Medicine Name</th>
@@ -87,8 +88,8 @@ const Shop = () => {
                   <th>Discount</th>
                   <th>Action</th>
                 </tr>
-              </thead>
-              <tbody>
+              </thead> */}
+              {/* <tbody>
                 
                 {
                     sortedMedicine.map((item, index) => <>
@@ -98,8 +99,17 @@ const Shop = () => {
                         
                 }
           
-              </tbody>
-            </table>
+              </tbody> */}
+            {/* </table> */} 
+
+            {
+              sortedMedicine.map((item, index) => <>
+                  {/* <ProductCard  index={index} setSelectedItem={setSelectedItem}></ProductCard> */}
+                  <ProductRow item={item} index={index} setSelectedItem={setSelectedItem}></ProductRow>
+              
+              </>)
+                        
+            }
 
              {/* Modal */}
              {selectedItem && (

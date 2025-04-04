@@ -5,64 +5,95 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useCart from "../Hooks/useCart";
 import useAuth from "../Hooks/useAuth";
+import { FaCartPlus } from "react-icons/fa";
 
-const ProductRow = ({item, index, setSelectedItem}) => {
+const ProductRow = ({ item, index, setSelectedItem }) => {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const [, refetch] = useCart();
 
-    const {user  } = useAuth();
-    const axiosSecure = useAxiosSecure();
-    const navigate = useNavigate();
-    const [, refetch] = useCart();
+  const {
+    _id,
+    brand_name,
+    generic_name,
+    brand,
+    category,
+    price,
+    discount,
+    quantity,
+    description,
+    photo,
+    seller,
+  } = item || {};
+  //console.log(Product);
 
-    const {_id, brand_name, generic_name, brand, category, price, discount, quantity, description, photo, seller} = item || {};
-    //console.log(Product);
-    
-    
-    const addToCart = async() =>{
-        if(user && user?.email){
-            const cartItems = {
-                productId: _id,
-                brand_name,
-                brand,
-                price,
-                photo,
-                discount,
-                quantity,
-                seller,
-                email: user?.email,
-            }
-           await axiosSecure.post('/myCarts', cartItems)
-            .then(res => {
-                if(res.data.insertedId){
-                    Swal.fire({
-                        title: 'Success',
-                        text: `${brand_name} is Added to your Cart`,
-                        icon: 'success',
-                        confirmButtonText: 'OK',
-                    });
-                    refetch();
-                }
-            })
+  const addToCart = async () => {
+    if (user && user?.email) {
+      const cartItems = {
+        productId: _id,
+        brand_name,
+        brand,
+        price,
+        photo,
+        discount,
+        quantity,
+        seller,
+        email: user?.email,
+      };
+      await axiosSecure.post("/myCarts", cartItems).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Success",
+            text: `${brand_name} is Added to your Cart`,
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          refetch();
         }
-        else{
-            Swal.fire({
-                title: "You are not Logged In",
-                text: "Please Login to add cart",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Login!",
-              }).then(result => {
-                if (result.isConfirmed) {
-                    navigate('/login');
-                }
-              })
+      });
+    } else {
+      Swal.fire({
+        title: "You are not Logged In",
+        text: "Please Login to add cart",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
         }
+      });
     }
+  };
 
   return (
     <>
-      <tr>
+      <div className="bg-white rounded-md border p-5 hover:shadow-md duration-200">
+        <div>
+          <img src={photo} className="w-full object-cover" alt="" />
+        </div>
+        <h2 className="font-bold md:text-xl sm:text-lg text-base leading-tight my-2">
+          {brand_name}
+        </h2>
+        <hr></hr>
+        <div className="flex justify-between items-center mt-4">
+          <p className="md:text-base text-sm font-bold text-black">
+            $ <span>{price}</span>
+          </p>
+          {/* <Link to={`/products/${_id}`} className="btn">
+          
+        </Link> */}
+        <FaCartPlus onClick={addToCart} className="cursor-pointer "/>         
+          <Link to={`/productDetails/${_id}`} className="">
+            <FaEye />
+          </Link>
+        </div>
+      </div>
+
+      {/* <tr>
         <th>
           <label>{index + 1}</label>
         </th>
@@ -90,8 +121,7 @@ const ProductRow = ({item, index, setSelectedItem}) => {
             <FaEye className="text-base" />
           </button>
         </th>
-      </tr>
-
+      </tr> */}
     </>
   );
 };

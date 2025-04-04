@@ -23,7 +23,7 @@ const TopBrands = () => {
         <div className=" pb-14">
       <div className="w-11/12 mx-auto">
         <div className=" mb-2">
-          <h2 className="font-bold lg:text-4xl md:text-3xl text-2xl">Top Brands</h2>
+          <h2 className="font-bold lg:text-4xl md:text-3xl text-2xl text-center">Top Brands</h2>
         </div>
 
         <div className="brands">

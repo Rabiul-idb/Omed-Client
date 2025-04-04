@@ -39,11 +39,11 @@ const SpecialForYou = () => {
           <div className=" grid lg:grid-cols-4 grid-cols-2 gap-6">
            
               
-                <div className="discount-card relative p-5 rounded-md bg-gradient-to-br from-[#fcfbff] to-[#b398ff] rounded-tr-[50px]">
+                <div className="discount-card relative p-5 rounded-md bg-gradient-to-br from-[#fcfbff] to-[#dc2626] rounded-tr-[50px]">
                   <h4 className="uppercase font-medium text-xs md:text-base">Upto</h4>
                   <h3 className="uppercase font-bold md:text-xl text-base my-1">10% Off</h3>
                   <p className="font-medium md:text-xl text-base">+ Cashback</p>
-                  <Link to={'tel:01672119007'} className="btn bg-white md:text-base text-xs grid place-items-center mt-7">
+                  <Link to={'tel:01672119007'} className="btn bg-white md:text-base text-xs inline-grid place-items-center mt-7">
                    Call Now
                   </Link>
                   <div className="absolute bg-white p-2 rounded-full top-0 right-0">
@@ -51,7 +51,7 @@ const SpecialForYou = () => {
                   </div>
                 </div>
              
-                <div className="discount-card relative p-5 rounded-md bg-gradient-to-br from-[#fcfbff] to-[#b398ff] rounded-tr-[50px]">
+                <div className="discount-card relative p-5 rounded-md bg-gradient-to-br from-[#fcfbff] to-[#dc2626] rounded-tr-[50px]">
                   <h4 className="uppercase font-medium text-xs md:text-base">Upto</h4>
                   <h3 className="uppercase font-bold md:text-xl text-base my-1">14% Off</h3>
                   <p className="font-medium md:text-xl text-base">+ Cashback</p>
@@ -63,7 +63,7 @@ const SpecialForYou = () => {
                   </div>
                 </div>
              
-                <div className="discount-card relative p-5 rounded-md bg-gradient-to-br from-[#fcfbff] to-[#b398ff] rounded-tr-[50px]">
+                <div className="discount-card relative p-5 rounded-md bg-gradient-to-br from-[#fcfbff] to-[#dc2626] rounded-tr-[50px]">
                   <h4 className="uppercase font-medium text-xs md:text-base">Upto</h4>
                   <h3 className="uppercase font-bold md:text-xl text-base my-1">15% Off</h3>
                   <p className="font-medium md:text-xl text-base">+ Cashback</p>
@@ -75,11 +75,11 @@ const SpecialForYou = () => {
                   </div>
                 </div>
               
-                <div className="discount-card relative p-5 rounded-md bg-gradient-to-br from-[#fcfbff] to-[#b398ff] rounded-tr-[50px]">
+                <div className="discount-card relative p-5 rounded-md bg-gradient-to-br from-[#fcfbff] to-[#dc2626] rounded-tr-[50px]">
                   <h4 className="uppercase font-medium text-xs md:text-base">Upto</h4>
                   <h3 className="uppercase font-bold md:text-xl text-base my-1">12% Off</h3>
                   <p className="font-medium md:text-xl text-base">+ Cashback</p>
-                  <Link to={'tel:01672119007'} className="btn bg-white md:text-base text-xs grid place-items-center mt-7">
+                  <Link to={'tel:01672119007'} className="btn bg-white md:text-base text-xs inline-grid place-items-center mt-7">
                     Call to Order
                   </Link>
                   <div className="absolute bg-white p-2 rounded-full top-0 right-0">

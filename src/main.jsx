@@ -15,11 +15,13 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById('root')).render(
   <StrictMode>
    <HelmetProvider>
-    <QueryClientProvider client={queryClient}> <AuthContext>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </AuthContext></QueryClientProvider>
+    <QueryClientProvider client={queryClient}> 
+      <AuthContext>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </AuthContext>
+    </QueryClientProvider>
    </HelmetProvider>
   </StrictMode>,
 )

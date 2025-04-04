@@ -3,7 +3,7 @@ import logo from "../../assets/images/logo.png";
 const Footer = () => {
   return (
     <div className="bg-clr-1 ">
-      <footer className="footer lg:grid-cols-4 md:grid-cols-4 grid-cols-2 w-11/12 mx-auto text-base-content py-10">
+      {/* <footer className="footer lg:grid-cols-4 md:grid-cols-4 grid-cols-2 w-11/12 mx-auto text-base-content py-10">
         <nav>
           <h6 className="footer-title">Services</h6>
           <a className="link link-hover">Branding</a>
@@ -31,7 +31,26 @@ const Footer = () => {
           <a className="link link-hover">Privacy policy</a>
           <a className="link link-hover">Cookie policy</a>
         </nav>
-      </footer>
+      </footer> */}
+      <footer className="footer footer-horizontal footer-center  text-primary-content p-10">
+      <aside className="grid-flow-col items-center">
+        <img src={logo} className="w-14" alt="" />
+      </aside>
+  <aside>
+        <p className="text-black">
+          <span className="text-red-600 font-bold text-lg"> OMED </span>-
+          Online Medicine
+          <br />
+          Providing Medicine to your doorstep
+        </p>
+    <p className="text-black">Copyright © {new Date().getFullYear()} - All right reserved</p>
+  </aside>
+  <nav>
+    <div className="grid grid-flow-col gap-4">
+      
+    </div>
+  </nav>
+</footer>
       <footer className="footer w-11/12 mx-auto text-base-content border-base-300 border-t  py-4">
         <aside className="grid-flow-col items-center">
           <img src={logo} className="w-14" alt="" />

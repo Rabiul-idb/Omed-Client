@@ -18,7 +18,9 @@ const Review = () => {
 
             <Swiper
            
-            autoplay={true}
+           autoplay={{
+            delay: 8000,
+         }}
             loop={true}
             modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
